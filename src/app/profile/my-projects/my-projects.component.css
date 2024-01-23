@@ -34,7 +34,7 @@ input {
 h3 {
     color: aliceblue;
 }
-.title {
+.project-type {
     font-size: 20px;
 }
 .project {
@@ -48,6 +48,10 @@ h3 {
 }
 .project-header {
     padding-left: 10px;
+}
+.project .title {
+    font-size: 120%;
+    color: #6370a0;
 }
 .services {
     display: flex;

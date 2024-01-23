@@ -4,6 +4,7 @@ import { ProfileComponent } from './profile.component';
 import { MyAccountComponent } from './my-account/my-account.component';
 import { MyProjectsComponent } from './my-projects/my-projects.component';
 import { NotificationsComponent } from './notifications/notifications.component';
+import { ProjectComponent } from './project/project.component';
 
 const routes: Routes = [
   {
@@ -12,7 +13,8 @@ const routes: Routes = [
     children: [
       {path: 'compte', component: MyAccountComponent},
       {path: 'mes-projets', component: MyProjectsComponent},
-      {path: 'notifications', component: NotificationsComponent}
+      {path: 'notifications', component: NotificationsComponent},
+      {path: 'projet', component: ProjectComponent}
     ]
   }
 ];

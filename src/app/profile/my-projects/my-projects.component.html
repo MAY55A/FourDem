@@ -1,13 +1,13 @@
-<section>
+<div>
     <div class="section-header">
         <input type="text" placeholder="chercher un projet...">
         <button class="add">+ proposer un projet</button>
     </div>
-    <a class="title">Projets Publiés</a>
+    <a class="project-type">Projets Publiés</a>
     <div class="published projects">
         <div class="project">
             <div class="project-header">
-                <h4 class="title">creation d'un siteweb</h4>
+                <a [routerLink]="['/projet']" class="title">creation d'un siteweb</a>
                 <p class="date">publié le 6 janvier 2024</p>
             </div>
             <ul class="services">
@@ -22,7 +22,7 @@
         </div>
         <div class="project">
             <div class="project-header">
-                <h4 class="title">creation d'un siteweb</h4>
+                <a [routerLink]="['profile/projet']" class="title">creation d'un siteweb</a>
                 <p class="date">publié le 1 janvier 2024</p>
             </div>
             <ul class="services">
@@ -37,11 +37,11 @@
             </div>
         </div>
     </div>
-    <a class="title">Projets Proposés</a>
+    <a class="project-type">Projets Proposés</a>
     <div class="proposed projects">
         <div class="project">
             <div class="project-header">
-                <h4 class="title">creation d'un siteweb</h4>
+                <a [routerLink]="['profile/projet']" class="title">creation d'un siteweb</a>
                 <p class="date">proposé le 5 janvier 2024</p>
             </div>
             <ul class="services">
@@ -55,7 +55,7 @@
         </div>
         <div class="project">
             <div class="project-header">
-                <h4 class="title">creation d'un siteweb</h4>
+                <a [routerLink]='["projet"]' class="title">creation d'un siteweb</a>
                 <p class="date">proposé le 15 janvier 2024</p>
             </div>
             <ul class="services">
@@ -69,11 +69,11 @@
             </div>
         </div>
     </div>
-    <a class="title">Projets Terminés</a>
+    <a class="project-type">Projets Terminés</a>
     <div class="finished projects">
         <div class="project">
             <div class="project-header">
-                <h4 class="title">creation d'un siteweb</h4>
+                <a [routerLink]='["projet"]' class="title">creation d'un siteweb</a>
                 <p class="date">publié le 5 novembre 2023</p>
                 <p class="date">terminé le 15 janvier 2024</p>
             </div>
@@ -87,7 +87,7 @@
         </div>
         <div class="project">
             <div class="project-header">
-                <h4 class="title">creation d'un siteweb</h4>
+                <a [routerLink]='["projet"]' class="title">creation d'un siteweb</a>
                 <p class="date">publié le 1 janvier 2024</p>
                 <p class="date">terminé le 19 janvier 2024</p>
             </div>
@@ -102,11 +102,11 @@
             </div>
         </div>
     </div>
-    <a class="title">Projets Refusés</a>
+    <a class="project-type">Projets Refusés</a>
     <div class="proposed projects">
         <div class="project">
             <div class="project-header">
-                <h4 class="title">creation d'un siteweb</h4>
+                <a [routerLink]='["projet"]' class="title">creation d'un siteweb</a>
                 <p class="date">proposé le 5 janvier 2024</p>
             </div>
             <ul class="services">
@@ -120,7 +120,7 @@
         </div>
         <div class="project">
             <div class="project-header">
-                <h4 class="title">creation d'un siteweb</h4>
+                <a [routerLink]='["projet"]' class="title">creation d'un siteweb</a>
                 <p class="date">proposé le 15 janvier 2024</p>
             </div>
             <ul class="services">
@@ -134,4 +134,4 @@
             </div>
         </div>
     </div>
-</section>
+</div>
