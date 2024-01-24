@@ -1,0 +1,22 @@
+.filters {
+    margin: 20px;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+
+    input {
+        height: 40px;
+    }
+
+    select {
+        width: 90%;
+        border-radius: 10px;
+    }
+}
+
+.infos {
+
+    img {
+        width: 50px;
+    }
+}
