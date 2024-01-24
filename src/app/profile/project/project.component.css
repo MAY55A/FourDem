@@ -68,7 +68,7 @@ h5 {
 }
 .proposition {
     position: relative;
-    background-color: #929ab9;
+    background-color: hsla(218, 45%, 76%, 0.9);
     border-radius: 15px;
     padding: 2%;
     margin-top: 2%;
