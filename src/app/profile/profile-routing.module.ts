@@ -14,7 +14,8 @@ const routes: Routes = [
       {path: 'compte', component: MyAccountComponent},
       {path: 'mes-projets', component: MyProjectsComponent},
       {path: 'notifications', component: NotificationsComponent},
-      {path: 'projet', component: ProjectComponent}
+      {path: 'projet', component: ProjectComponent},
+      {path: '', redirectTo: 'compte', pathMatch: 'full'}
     ]
   }
 ];
