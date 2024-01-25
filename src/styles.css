@@ -1,4 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
+@import "assets/css/font-awesome.min.css";
+@import "assets/css/linearicons.css";
+@import "assets/css/animate.css";
+@import "assets/css/flaticon.css";
+@import "assets/css/slick.css";
+@import "assets/css/bootstrap.min.css";
+@import "assets/css/bootsnav.css";
+@import "assets/css/responsive.css";
+
+
 *{
     padding: 0;
     margin: 0;
