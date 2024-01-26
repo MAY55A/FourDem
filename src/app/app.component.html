@@ -4,7 +4,7 @@
   <div class="header-area">
     <!-- Start Navigation -->
     <nav class="navbar navbar-default bootsnav  navbar-sticky navbar-scrollspy" data-minus-value-desktop="70"
-      data-minus-value-mobile="55" data-speed="1000">
+      data-minus-value-mobile="55" data-speed="1000" style=" position: fixed; width: 100%;">
 
       <div class="container">
 
@@ -13,7 +13,7 @@
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-menu">
             <i class="fa fa-bars"></i>
           </button>
-          <a class="navbar-brand" routerLink="">four<span>dem</span></a>
+          <a class="navbar-brand" routerLink="/accueil">four<span>dem</span></a>
 
         </div><!--/.navbar-header-->
         <!-- End Header Navigation -->
@@ -21,11 +21,11 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse menu-ui-design" id="navbar-menu">
           <ul class="nav navbar-nav navbar-right" data-in="fadeInDown" data-out="fadeOutUp">
-            <li class=" scroll active"><a routerLink="">accueil</a></li>
-            <li class="scroll"><a routerLink="/services">services disponibles</a></li>
-            <li class="scroll"><a routerLink="/projets">projets proposés</a></li>
-            <li class="scroll"><a routerLink="/compte/connexion" class="login signup">se connecter</a></li>
-            <li class="scroll"><a routerLink="/compte/creation1" class="login signin">s'inscrire</a></li>
+            <li class="scroll" routerLinkActive="active"><a routerLink="/accueil">accueil</a></li>
+            <li class="scroll" routerLinkActive="active"><a routerLink="/services">services disponibles</a></li>
+            <li class="scroll" routerLinkActive="active"><a routerLink="/projets">projets proposés</a></li>
+            <li class="scroll" routerLinkActive="active"><a routerLink="/compte/connexion" class="login signup">se connecter</a></li>
+            <li class="scroll" routerLinkActive="active"><a routerLink="/compte/creation1" class="login signin">s'inscrire</a></li>
           </ul><!--/.nav -->
         </div><!-- /.navbar-collapse -->
       </div><!--/.container-->
@@ -53,7 +53,7 @@
           <ul class="footer-menu-item">
             <li class="scroll"><a href="#works">comment ça marche</a></li>
             <li class="scroll"><a href="#">contact</a></li>
-            <li class=" scroll"><a href="#">mon compte</a></li>
+            <li class="scroll"><a href="#">mon compte</a></li>
           </ul><!--/.nav -->
         </div>
       </div>

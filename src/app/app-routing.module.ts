@@ -5,10 +5,13 @@ import { ServicesComponent } from './services/services.component';
 import { ProjectsComponent } from './projects/projects.component';
 
 const routes: Routes = [
-  {path: '', component: HomeComponent},
-  {path: 'services/:domaine', component: ServicesComponent},
-  {path: 'services',component: ServicesComponent},
+  {path: 'accueil', component: HomeComponent},
   {path: 'projets', component: ProjectsComponent},
+  {path: 'projets/:domaine', component: ProjectsComponent},
+  {path: 'projets/:domaine/:categorie', component: ProjectsComponent},
+  {path: 'services',component: ServicesComponent},
+  {path: 'services/:domaine', component: ServicesComponent},
+  {path: 'services/:domaine/:categorie', component: ServicesComponent},
   {
     path: 'compte',
     loadChildren: ()=>import("./signing/signing.module").then((p)=>p.SigningModule)
