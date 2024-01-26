@@ -1,17 +1,44 @@
-<div class="main-container">
-    <header class="block">
-        <ul class="header-menu horizontal-list">
-            <li>
-                <a class="header-menu-tab" routerLink="compte" routerLinkActive="active">Compte</a>
-            </li>
-            <li>
-                <a class="header-menu-tab" routerLink="mes-projets" routerLinkActive="active">Projets</a>
-            </li>
-            <li>
-                <a class="header-menu-tab" routerLink="notifications" routerLinkActive="active">Notifications</a>
-                <a class="header-menu-number">5</a>
-            </li>
+
+  <!--msb: main sidebar-->
+  <div class="msb" id="msb">
+    <nav class="navbar navbar-default" role="navigation">
+      <!-- Main Menu -->
+      <div class="side-menu-container">
+        <ul class="nav navbar-nav">
+          <li>
+            <a routerLink="compte" routerLinkActive="active"><i class="fa fa-user"></i> Compte</a>
+          </li>
+          <!-- Dropdown-->
+          <li class="panel panel-default" id="dropdown">
+            <a data-toggle="collapse"  routerLink="mes-projets" routerLinkActive="active">
+              <i class="fa fa-folder"></i> Projets
+              <span class="caret"><a href="#dropdown-lvl1"></a></span>
+            </a>
+            <!-- Dropdown level 1 -->
+            <div id="dropdown-lvl1" class="panel-collapse collapse">
+              <div class="panel-body">
+                <ul class="nav navbar-nav">
+                  <li><a routerLink="mes-projets">+ Proposer un projet</a></li>
+                  <li><a routerLink="mes-projets">Projets publiés</a></li>
+                  <li><a routerLink="mes-projets">Projets proposés</a></li>
+                  <li><a routerLink="mes-projets">Projets terminés</a></li>
+                </ul>
+              </div>
+            </div>
+          </li>
+          <li>
+            <a routerLink="mes-projets"><i class="fa fa-heart"></i> Services</a>
+        </li>
+        <li>
+            <a routerLink="notifications" routerLinkActive="active"><i class="fa fa-bell"></i> Notifications</a>
+        </li>
         </ul>
-    </header>
+      </div>
+      <!-- /.navbar-collapse -->
+    </nav>
+  </div>
+  <!--main content wrapper-->
+  <div class="mcw">
+    <!--navigation here-->
     <router-outlet></router-outlet>
-</div>
+  </div>
