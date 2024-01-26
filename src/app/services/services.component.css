@@ -4,6 +4,19 @@
   box-sizing: border-box;
 }
 
+.domaine {
+  position: absolute;
+  right: 20px;
+  margin-top: 10px;
+  font-size: 17px;
+  color: rgba(38, 57, 134, 0.837);
+
+  select {
+    border-radius: 10px;
+    width: 150px;
+  }
+}
+
 .sliderBox {
   max-width: 100%;
   position: relative;
@@ -32,6 +45,7 @@
         width: 15em;
         height: 15em;
         border: 1px dotted #bababa;
+        border-radius: 20px;
         margin: 10px;
       }
     }
@@ -58,6 +72,18 @@
   }
 }
 
+.category.active, .category:hover {
+  background:rgba(24, 94, 174,0.3);
+
+  img {
+    filter:invert(100%);
+  }
+
+  h5 {
+    color: white;
+  }
+}
+
 .services {
     margin: 50px;
 
@@ -68,13 +94,17 @@
         border-radius: 30px;
         background: linear-gradient(to right, rgba(143, 160, 229, 0.837), rgb(234, 234, 234, 0.1));
 
-        img {
+        .info {
+          margin-right: 30px;
+
+          img {
             width: 7em;
             height: 7em;
             border-radius: 2em;
-            margin: 30px;
+            margin-bottom: 10px;
+          }
         }
-        
+
         .desc {
             margin-bottom: 10px;
         }
