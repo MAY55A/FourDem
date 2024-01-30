@@ -7,6 +7,7 @@ import { SignupStep1Component } from './signup-step1/signup-step1.component';
 import { SignupStep2Component } from './signup-step2/signup-step2.component';
 import { SignupStep3Component } from './signup-step3/signup-step3.component';
 import { SigninComponent } from './signin/signin.component';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { SigninComponent } from './signin/signin.component';
   ],
   imports: [
     CommonModule,
-    SigningRoutingModule
+    SigningRoutingModule,
+    FormsModule
   ]
 })
 export class SigningModule { }
