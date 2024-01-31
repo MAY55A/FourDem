@@ -1,12 +1,13 @@
 <div class="container" id="container">
     <div class="form-container">
-        <form action="#">
             <h1>Se connecter</h1>
-            <input type="email" placeholder="Email" />
-            <input type="password" placeholder="mot de passe" />
-            <a href="#">mot de passe oublié?</a>
-            <button routerLink="/profile">connecter</button>
-        </form>
+            <input type="email" placeholder="Email" [(ngModel)]="email" required/>
+            <input type="password" placeholder="mot de passe" [(ngModel)]="password" required/>
+            <a href="">mot de passe oublié?</a>
+            <button (click)="login()">se connecter</button>
+            <div class="alert alert-danger" role="alert" *ngIf ="alert">
+                <strong>Échec !</strong> {{alert}}
+            </div>
     </div>
     <div class="overlay-container">
         <h1></h1>

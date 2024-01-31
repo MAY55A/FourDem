@@ -4,6 +4,7 @@ export class User {
     email!: string;
     hash!: string;
     createdAt?: Date;
+    description?: string;
     type!: string;
     domain?: string;
     contacts?: string[];

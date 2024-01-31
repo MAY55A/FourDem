@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from '../classes/user';
+import { User } from '../_models/user';
 
 @Component({
   selector: 'app-signing',
