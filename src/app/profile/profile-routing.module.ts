@@ -14,8 +14,18 @@ const routes: Routes = [
       {path: 'compte', component: MyAccountComponent},
       {path: 'mes-projets', component: MyProjectsComponent},
       {path: 'notifications', component: NotificationsComponent},
-      {path: 'projet', component: ProjectComponent},
+      {path: 'mes-projets/:id', component: ProjectComponent},
       {path: '', redirectTo: 'compte', pathMatch: 'full'}
+    ]
+  },
+  {
+    path: ':email',
+    component: ProfileComponent,
+    children: [
+      {path: 'compte', component: MyAccountComponent},
+      {path: 'projets', component: MyProjectsComponent},
+      {path: 'projets/:id', component: ProjectComponent},
+      {path: ':email', redirectTo: 'compte', pathMatch: 'full'}
     ]
   }
 ];

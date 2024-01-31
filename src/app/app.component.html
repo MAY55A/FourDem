@@ -4,7 +4,7 @@
   <div class="header-area">
     <!-- Start Navigation -->
     <nav class="navbar navbar-default bootsnav  navbar-sticky navbar-scrollspy" data-minus-value-desktop="70"
-      data-minus-value-mobile="55" data-speed="1000" style=" position: fixed; width: 100%;">
+      data-minus-value-mobile="55" data-speed="1000" style=" position: fixed; width: 100%; height: 80px;">
 
       <div class="container">
 
@@ -24,8 +24,8 @@
             <li class="scroll" routerLinkActive="active"><a routerLink="/accueil">accueil</a></li>
             <li class="scroll" routerLinkActive="active"><a routerLink="/services">services disponibles</a></li>
             <li class="scroll" routerLinkActive="active"><a routerLink="/projets">projets proposés</a></li>
-            <li class="scroll" routerLinkActive="active"><a routerLink="/compte/connexion" class="login signup">se connecter</a></li>
-            <li class="scroll" routerLinkActive="active"><a routerLink="/compte/creation1" class="login signin">s'inscrire</a></li>
+            <li *ngIf="!user" class="scroll" routerLinkActive="active"><a routerLink="/compte/connexion" class="login signup">se connecter</a></li>
+            <li *ngIf="!user" class="scroll" routerLinkActive="active"><a routerLink="/compte/creation1" class="login signin">s'inscrire</a></li>
           </ul><!--/.nav -->
         </div><!-- /.navbar-collapse -->
       </div><!--/.container-->
@@ -33,6 +33,17 @@
     <!-- End Navigation -->
   </div><!--/.header-area-->
   <div class="clearfix"></div>
+  <div *ngIf="user" class="profile">
+    <a  routerLink="/profile/compte"><img src="../assets/images/home.jpg">
+    <h5>{{user.name}}</h5></a>
+    <ul>
+      <li><a routerLink="/profile/compte"><i class="fa fa-user"></i>  compte</a></li>
+      <li><a routerLink="/profile/mes-projets"><i class="fa fa-folder"></i>  projets</a></li>
+      <li><a routerLink="/profile/notifications"><i class="fa fa-bell"></i>  notifications</a></li>
+      <li><a routerLink="/profile/paramètres"><i class="fa fa-gear"></i>  paramètres</a></li>
+      <li><a (click)="logout()"><i class="fa fa-sign-out"></i>  déconnexion</a></li>
+    </ul>
+  </div>
 
 </section><!-- /.top-area-->
 <!-- top-area End -->
