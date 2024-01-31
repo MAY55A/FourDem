@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from 'src/app/api/user.service';
+import { UserService } from 'src/app/_services/user.service';
 import { SHA256, enc } from "crypto-js";
 import { Router } from '@angular/router';
 import { SigningComponent } from '../signing.component';
-import { User } from 'src/app/classes/user';
+import { User } from 'src/app/_models/user';
 
 @Component({
   selector: 'app-signup-step1',

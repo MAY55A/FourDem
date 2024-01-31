@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router} from '@angular/router';
-import { UserService } from 'src/app/api/user.service';
+import { UserService } from 'src/app/_services/user.service';
 import { SigningComponent } from '../signing.component';
 
 @Component({
@@ -23,7 +23,7 @@ export class SignupStep2Component implements OnInit{
   ChooseD() {
     this.signup.newUser.type = "Demandeur";
     this.userService.createUser(this.signup.newUser).subscribe(data => {
-      this.router.navigate(['/profile']);
+      this.router.navigate(['/compte/connexion']);
     });
   }
 

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { SigningComponent } from '../signing.component';
-import { UserService } from 'src/app/api/user.service';
+import { UserService } from 'src/app/_services/user.service';
 
 @Component({
   selector: 'app-signup-step3',
@@ -16,7 +16,7 @@ export class SignupStep3Component implements OnInit{
   chooseDomain(d: string): void {
     this.signup.newUser.domain = d;
     this.userService.createUser(this.signup.newUser).subscribe(data => {
-      this.router.navigate(['/profile']);
+      this.router.navigate(['/compte/connexion']);
     });
   }
 }
