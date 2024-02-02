@@ -7,6 +7,7 @@ import { MyProjectsComponent } from './my-projects/my-projects.component';
 import { MyAccountComponent } from './my-account/my-account.component';
 import { NotificationsComponent } from './notifications/notifications.component';
 import { ProjectComponent } from './project/project.component';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { ProjectComponent } from './project/project.component';
   ],
   imports: [
     CommonModule,
-    ProfileRoutingModule
+    ProfileRoutingModule,
+    FormsModule
   ]
 })
 export class ProfileModule { }
