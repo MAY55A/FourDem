@@ -1,14 +1,14 @@
-<div>
+<div class="main-section">
     <div class="section-header">
         <input type="text" placeholder="chercher un projet...">
-        <button class="add">+ proposer un projet</button>
+        <button *ngIf="user" (click)="openAddProjectForm()" class="add">+ proposer un projet</button>
     </div>
     <a class="project-type">Projets Publiés</a>
     <div class="published projects">
         <div class="project">
             <div class="project-header">
-                <a [routerLink]="['../projet']" class="title">creation d'un siteweb</a>
-                <p class="date">publié le 6 janvier 2024</p>
+                <a [routerLink]="['./1']" class="title">creation d'un siteweb</a>
+                <p class="domaine">publié le 6 janvier 2024</p>
             </div>
             <div>
                 <p class="description">description: sdf sdf ljjlk hjhjb jlkl. dsfsdsq f fsdf reg fsqdf, ttr erth
@@ -27,7 +27,7 @@
         <div class="project">
             <div class="project-header">
                 <a [routerLink]="['../projet']" class="title">creation d'un siteweb</a>
-                <p class="date">publié le 1 janvier 2024</p>
+                <p class="domaine">publié le 1 janvier 2024</p>
             </div>
             <ul class="services">
                 <li class="service">développement web</li>
@@ -46,7 +46,7 @@
         <div class="project">
             <div class="project-header">
                 <a [routerLink]="['../projet']" class="title">creation d'un siteweb</a>
-                <p class="date">proposé le 5 janvier 2024</p>
+                <p class="domaine">proposé le 5 janvier 2024</p>
             </div>
             <div>
                 <p class="description">description: sdf sdf ljjlk hjhjb jlkl. dsfsdsq f fsdf reg fsqdf, ttr erth
@@ -64,7 +64,7 @@
         <div class="project">
             <div class="project-header">
                 <a [routerLink]='["projet"]' class="title">creation d'un siteweb</a>
-                <p class="date">proposé le 15 janvier 2024</p>
+                <p class="domaine">proposé le 15 janvier 2024</p>
             </div>
             <ul class="services">
                 <li class="service">développement web</li>
@@ -82,8 +82,8 @@
         <div class="project">
             <div class="project-header">
                 <a [routerLink]='["projet"]' class="title">creation d'un siteweb</a>
-                <p class="date">publié le 5 novembre 2023</p>
-                <p class="date">terminé le 15 janvier 2024</p>
+                <p class="domaine">publié le 5 novembre 2023</p>
+                <p class="domaine">terminé le 15 janvier 2024</p>
             </div>
             <ul class="services">
                 <li class="service">développement web</li>
@@ -96,8 +96,8 @@
         <div class="project">
             <div class="project-header">
                 <a [routerLink]='["projet"]' class="title">creation d'un siteweb</a>
-                <p class="date">publié le 1 janvier 2024</p>
-                <p class="date">terminé le 19 janvier 2024</p>
+                <p class="domaine">publié le 1 janvier 2024</p>
+                <p class="domaine">terminé le 19 janvier 2024</p>
             </div>
             <ul class="services">
                 <li class="service">développement web</li>
@@ -115,7 +115,7 @@
         <div class="project">
             <div class="project-header">
                 <a [routerLink]='["projet"]' class="title">creation d'un siteweb</a>
-                <p class="date">proposé le 5 janvier 2024</p>
+                <p class="domaine">proposé le 5 janvier 2024</p>
             </div>
             <div>
                 <p class="description">description: sdf sdf ljjlk hjhjb jlkl. dsfsdsq f fsdf reg fsqdf, ttr erth
@@ -133,7 +133,7 @@
         <div class="project">
             <div class="project-header">
                 <a [routerLink]='["projet"]' class="title">creation d'un siteweb</a>
-                <p class="date">proposé le 15 janvier 2024</p>
+                <p class="domaine">proposé le 15 janvier 2024</p>
             </div>
             <ul class="services">
                 <li class="service">développement web</li>
@@ -143,6 +143,45 @@
             </ul>
             <div class="infos">
                 <a href="#"><span>+</span></a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':displayStyle}">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="card">
+                    <h2 class="card-header">Ajouter un projet</h2><br>
+                        <div class="card-body">
+                            <form (ngSubmit)="submitAddProjectForm()">
+                                <div class="form-group">
+                                    <label for="titre">Titre:</label>
+                                    <input name="titre" required class="form-control" [(ngModel)]="project.title">
+                                </div>
+                                <div class="form-group">
+                                    <label for="desc">Description :</label>
+                                    <textarea rows="15" name="desc" required class="form-control"  [(ngModel)]="project.description">description ....</textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="domaine">Domaine(s):</label><br>
+                                    <div *ngFor="let d of domains;let i=index;"><input type="checkbox" [(ngModel)]="checkedDomains[i]" (ngModelChange)="getCategories()" name="domaine">&nbsp;{{d}}</div>
+                                </div>
+                                <label>Catégories:</label>
+                                <div class="form-group checkbox-button-group">
+                                    <div *ngFor="let c of categories;let i=index;" class="checkbox-button">
+                                        <input type="checkbox" [(ngModel)]="checkedCategories[i]" (ngModelChange)="updateSelectedCategories()" name="category">
+                                        <label>{{c.name}}</label>
+                                    </div>
+                                </div>
+                                <div class="alert alert-danger" role="alert" *ngIf ="alert">
+                                    <strong>Échec !</strong> {{alert}}
+                                </div>
+                                <button type="submit" class="btn btn-primary">proposer</button>
+                                <button type="button" (click)="closeAddProjectForm()" class="btn btnsecondary">annuler</button>
+                            </form>
+                        </div>
+                </div>
             </div>
         </div>
     </div>

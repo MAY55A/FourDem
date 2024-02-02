@@ -1,12 +1,13 @@
-section {
-    padding: 5%;
-    background-color: rgba(214, 221, 239, 0.8);
+.main-section {
+    padding: 100px 10px
 }
+
 .section-header {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     margin-bottom: 50px;
-}
+
 input {
     font-size: 14px;
     width: 350px;
@@ -16,6 +17,7 @@ input {
     text-transform: capitalize;
     font-weight: 500;
     padding-left: 10px;
+    margin: 10px;
 }
 .add {
     background: #2e5077;
@@ -26,10 +28,12 @@ input {
     border: none;
     width: 200px;
     height: 40px;
+    margin: 10px;
 }
 .add:hover {
     background-color: #43658d;
     color: #a5b9cf;
+}
 }
 h3 {
     color: aliceblue;
@@ -92,3 +96,36 @@ li.service:hover {
     font-size: 30px;
     margin-top: 0;
 }
+
+.checkbox-button-group {
+  }
+
+  .checkbox-button {
+    display: inline-block;
+    margin-right: 10px;
+    margin-top: -30px;
+  }
+
+  .checkbox-button input {
+    position: relative;
+    top: 45px;
+    left: 30%;
+    width: 40px;
+    height: 40px;
+    opacity: 0;
+    cursor: pointer;
+  }
+
+  .checkbox-button label {
+    display: block;
+    padding: 10px 15px;
+    font-size: 12px;
+    border: 1px solid #091522;
+    color: #091522;
+    border-radius: 5px;
+  }
+
+  .checkbox-button input:checked ~ label {
+    background-color: #1d3b5c;
+    color: #ffffff;
+  }
