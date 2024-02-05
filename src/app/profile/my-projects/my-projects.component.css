@@ -35,6 +35,14 @@ input {
     color: #a5b9cf;
 }
 }
+
+.exit {
+    position: relative;
+    left: 95%;
+    font-size: 20px;
+    color: #a45d5d;
+}
+
 h3 {
     color: aliceblue;
 }
@@ -57,9 +65,10 @@ h3 {
 }
 .project p {
     color: gray;
+    font-size: 12px;
 }
 .project .title {
-    font-size: 120%;
+    font-size: 140%;
     color: #6370a0;
 }
 .project .description {
@@ -85,17 +94,9 @@ li.service:hover {
 
 }
 .infos {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    justify-content: space-between;
-    width: 180px;
+    text-align: end;
 }
-.infos span {
-    color: #1F253D;
-    font-size: 30px;
-    margin-top: 0;
-}
+
 
 .checkbox-button-group {
   }
@@ -103,7 +104,6 @@ li.service:hover {
   .checkbox-button {
     display: inline-block;
     margin-right: 10px;
-    margin-top: -30px;
   }
 
   .checkbox-button input {
@@ -128,4 +128,40 @@ li.service:hover {
   .checkbox-button input:checked ~ label {
     background-color: #1d3b5c;
     color: #ffffff;
+  }
+
+  #addcat {
+    font-size: 15px;
+  }
+
+  .empty {
+    text-align: center;
+    border: 2px solid #1d3b5c;
+    border-radius: 10px;
+    margin-top: 50px;
+    padding: 100px;
+    font-size: 17px;
+    color: #1d3b5c;
+  }
+
+  .options  {
+    text-align: end;
+    width: 200px;
+    span {
+        font-size: 20px;
+    }
+  }
+
+  #options {
+    position: relative;
+    background-color: hsla(211, 62%, 32%, 0.564);
+    text-align: center;
+    border-radius: 5px;
+
+    li {
+        border: 1px solid beige;
+        width: 100%;
+        padding: 5px;
+        color: #ffffff;
+    }
   }

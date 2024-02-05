@@ -11,6 +11,10 @@ export class CategoryService {
   constructor(private httpClient: HttpClient) { }
 
   public getCategoriesByDomain(domain: string) {
-    return this.httpClient.get<Category[]>(`${environment.apiUrl}/categories/${domain}`);
+    return this.httpClient.get<Category[]>(`${environment.apiUrl}/categories/domain/${domain}`);
+  }
+
+  public getCategory(id: number) {
+    return this.httpClient.get<Category>(`${environment.apiUrl}/categories/${id}`);
   }
 }
