@@ -1,0 +1,43 @@
+form {
+    margin-top: 50px;
+    padding: 80px 20%;
+    border-radius: 20px;
+    background-color: rgba(99, 142, 186, 0.441);
+    h2 {
+        text-align: center;
+        margin-bottom: 50px;
+        font-size: 20px;
+        color: rgb(26, 49, 69);
+        text-transform: uppercase;
+    }
+    label {
+        color: rgb(26, 49, 69);
+    }
+    .autres {
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .contacts {
+        padding-left: 20px;
+        label{
+            font-size: 90%;
+            margin-bottom: -10px;
+        }
+    }
+    .contact {
+        width: 200px;
+        margin: 20px;
+    }
+
+    a {
+        text-decoration: underline;
+        margin-bottom: 10px;
+    }
+}
+button {
+}
+.btn-danger {
+    position: absolute;
+    right: 10px;
+    top: 30px;
+}
