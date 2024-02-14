@@ -1,5 +1,5 @@
 .main-section {
-    padding: 100px 10px
+    padding: 100px 10px;
 }
 
 .section-header {
@@ -61,7 +61,7 @@ h3 {
 .project-header {
     padding-left: 10px;
     min-width: 150px;
-    max-width: 200px;
+    max-width: 70%;
 }
 .project p {
     color: gray;
@@ -82,17 +82,16 @@ h3 {
 
 }
 li.service {
-    border: 2px solid #636F99;
+    background-color:#628ec7;
+    color: aliceblue;
     border-radius: 20px;
     margin: 5px;
-    padding: 5px;
-    width: fit-content;
+    padding: 8px;
+    min-width: 70px;
     height: max-content;
+    text-align: center;
 }
-li.service:hover {
-    
 
-}
 .infos {
     text-align: end;
 }
@@ -104,6 +103,7 @@ li.service:hover {
   .checkbox-button {
     display: inline-block;
     margin-right: 10px;
+    margin-top: -30px;
   }
 
   .checkbox-button input {
@@ -122,46 +122,17 @@ li.service:hover {
     font-size: 12px;
     border: 1px solid #091522;
     color: #091522;
+  }
+  .checkbox-button.cat label{
     border-radius: 5px;
   }
 
-  .checkbox-button input:checked ~ label {
+
+  .checkbox-button.cat input:checked ~ label, .skill input:checked ~ label{
     background-color: #1d3b5c;
     color: #ffffff;
   }
 
-  #addcat {
+  .addcat {
     font-size: 15px;
-  }
-
-  .empty {
-    text-align: center;
-    border: 2px solid #1d3b5c;
-    border-radius: 10px;
-    margin-top: 50px;
-    padding: 100px;
-    font-size: 17px;
-    color: #1d3b5c;
-  }
-
-  .options  {
-    text-align: end;
-    width: 200px;
-    span {
-        font-size: 20px;
-    }
-  }
-
-  #options {
-    position: relative;
-    background-color: hsla(211, 62%, 32%, 0.564);
-    text-align: center;
-    border-radius: 5px;
-
-    li {
-        border: 1px solid beige;
-        width: 100%;
-        padding: 5px;
-        color: #ffffff;
-    }
   }

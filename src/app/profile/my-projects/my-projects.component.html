@@ -1,89 +1,203 @@
 <div class="main-section">
-    <div class="section-header">
-        <input type="text" placeholder="chercher un projet..." [(ngModel)]="searchValue" (ngModelChange)="search()">
-        <button *ngIf="user" (click)="openProjectForm()" class="add">+ proposer un projet</button>
+  <div class="section-header">
+    <input
+      type="text"
+      placeholder="chercher un projet..."
+      [(ngModel)]="searchValue"
+      (ngModelChange)="search()"
+    />
+    <button *ngIf="user.id! == app.user?.id!" (click)="options.openProjectForm()" class="add">
+      + proposer un projet
+    </button>
+  </div>
+  <h2 class="project-type">Projets {{ status }}s</h2>
+  <div class="empty" *ngIf="projects.length == 0">Aucun Projet</div>
+  <div class="projects">
+    <div *ngFor="let p of projects; let i = index" class="project">
+      <div class="project-header">
+        <a [routerLink]="['../../../projets/projet/', p.id]" class="title">{{
+          p.title
+        }}</a>
+        <p *ngIf="status == 'proposé' || status == 'refusé'">
+          proposé {{ p.proposedAt | date: "à HH:mm, le yyyy/MM/dd" }}
+        </p>
+        <p *ngIf="status == 'publié' || status == 'terminé'">
+          publié {{ p.publishedAt | date: "à HH:mm, le yyyy/MM/dd" }}
+        </p>
+        <p *ngIf="status == 'terminé'">
+          terminé le {{ p.finishedAt | date: "à HH:mm, le yyyy/MM/dd" }}
+        </p>
+      </div>
+      <div>
+        <p class="description">{{ p.description.substr(0, 100) }}...</p>
+        <ul class="services">
+          <li *ngFor="let c of p.categories.split(',')" class="service">
+            {{ c }}
+          </li>
+        </ul>
+      </div>
+      <div  *ngIf="user.id! == app.user?.id!" class="options">
+        <a data-toggle="collapse" [href]="'#options' + i"><span>...</span></a>
+        <ul [id]="'options' + i" class="panel-collapse collapse">
+          <li *ngIf="p.status == 'publié'">
+            <button (click)="options.finishProject(p)">
+              <i class="fa fa-check"></i> marquer comme terminé
+            </button>
+          </li>
+          <li>
+            <button (click)="options.editProject(p)">
+              <i class="fa fa-pencil"></i> modifier
+            </button>
+          </li>
+          <li>
+            <button (click)="options.deleteProject(p.id!)">
+              <i class="fa fa-trash"></i> supprimer
+            </button>
+          </li>
+        </ul>
+      </div>
     </div>
-    <h2 class="project-type">Projets {{status}}s</h2>
-    <div class="empty" *ngIf="projects.length == 0">Aucun Projet</div>
-    <div class="projects">
-        <div *ngFor="let p of projects;" class="project">
-            <div class="project-header">
-                <a [routerLink]="['./', p.id]" class="title">{{p.title}}</a>
-                <p *ngIf="status=='proposé' || status=='refusé'">proposé {{ p.proposedAt | date: 'à HH:mm, le yyyy/MM/dd' }}</p>
-                <p *ngIf="status=='publié' || status=='terminé'">publié {{ p.publishedAt | date: 'à HH:mm, le yyyy/MM/dd' }}</p>
-                <p *ngIf="status=='terminé'">terminé le {{ p.finishedAt | date: 'à HH:mm, le yyyy/MM/dd' }}</p>
-            </div>
-            <div>
-                <p class="description">{{p.description.substr(0,100)}}...</p>
-                <ul class="services">
-                    <li *ngFor="let c of p.categories.split(',')" class="service">{{c}}</li>
-                </ul>
-            </div>
-            <div class="options">
-                <a data-toggle="collapse" href="#options"><span>...</span></a>
-                <ul id="options" class="panel-collapse collapse">
-                    <li *ngIf="p.status=='publié'"><button (click)="finishProject(p)"><i class="fa fa-check"></i> marquer comme terminé</button></li>
-                    <li><button (click)="editProject(p)"><i class="fa fa-pencil"></i> modifier</button></li>
-                    <li><button (click)="deleteProject(p.id!)"><i class="fa fa-trash"></i> supprimer</button></li>
-                </ul>
-            </div>
-        </div>
-    </div>
+  </div>
 </div>
-<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':displayStyle}">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-body">
-                <div class="card">
-                    <button type="button" (click)="closeProjectForm()" class="exit">X</button>
-                    <h2 class="card-header">{{formType}} d'un projet</h2><br>
-                        <div class="card-body">
-                            <form (ngSubmit)="formType=='Ajout' ? submitAddProjectForm(): submitEditProjectForm()">
-                                <div class="form-group">
-                                    <label for="titre">Titre:</label>
-                                    <input name="titre" required class="form-control" [(ngModel)]="project.title">
-                                </div>
-                                <div class="form-group">
-                                    <label for="desc">Description :</label>
-                                    <textarea rows="15" name="desc" required class="form-control"  [(ngModel)]="project.description">description ....</textarea>
-                                </div>
-                                <div *ngIf="formType=='Ajout'" class="form-group">
-                                    <label for="domaine">Domaine(s):</label><br>
-                                    <div *ngFor="let d of domains;let i=index;"><input type="checkbox" [(ngModel)]="checkedDomains[i]" (ngModelChange)="getCategories()" name="domaine">&nbsp;{{d}}</div>
-                                </div>
-                                <label>Catégories:</label>
-                                <div class="form-group checkbox-button-group">
-                                    <div *ngFor="let c of categories;let i=index;" class="checkbox-button">
-                                        <div *ngIf="!project.categories.includes(c.name)">
-                                            <input type="checkbox" [(ngModel)]="checkedCategories[i]" (ngModelChange)="updateSelectedCategories()" name="category">
-                                            <label>{{c.name}}</label>
-                                        </div>
-                                    </div>
-                                    <div *ngFor="let c of (project?.categories ? project?.categories?.split(',') : []);let i=index;" class="checkbox-button" (change)="removeCategory(c)">
-                                        <input type="checkbox" checked name="category">
-                                        <label>{{c}}</label>
-                                    </div>
-                                    <div *ngIf="formType=='Modification'" class="checkbox-button">
-                                        <label><button data-toggle="collapse" href="#addcategories" id="addcat">+</button></label>
-                                    </div>
-                                    <div id="addcategories" class="panel-collapse collapse">
-                                        <div class="panel-body">
-                                            <label for="domaine">Domaine(s):</label><br>
-                                            <div *ngFor="let d of domains;let i=index;"><input type="checkbox" [(ngModel)]="checkedDomains[i]" (ngModelChange)="getCategories()" name="domaine">&nbsp;{{d}}</div>
-                                        </div>
-                                      </div>
-                                </div>
-                                <div class="alert alert-danger" role="alert" *ngIf ="alert">
-                                    <strong>Échec !</strong> {{alert}}
-                                </div>
-                                <div class="alert alert-success" role="alert" *ngIf ="success">
-                                    <strong>Succès !</strong> {{success}}
-                                </div>
-                                <button type="submit" class="btn btn-primary">{{formType == "Ajout" ? "proposer" : "modifier"}}</button>
-                            </form>
-                        </div>
+<div
+  class="modal"
+  tabindex="-1"
+  role="dialog"
+  [ngStyle]="{ display: options.displayStyle }"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="card">
+          <button
+            type="button"
+            (click)="options.closeProjectForm()"
+            class="exit"
+          >
+            X
+          </button>
+          <h2 class="card-header">{{ options.formType }} d'un projet</h2>
+          <br />
+          <div class="card-body">
+            <form
+              (ngSubmit)="
+                options.formType == 'Ajout'
+                  ? options.submitAddProjectForm(user!)
+                  : options.submitEditProjectForm()
+              "
+            >
+              <div class="scrollable">
+                <div class="form-group">
+                  <label for="titre">Titre:</label>
+                  <input
+                    name="titre"
+                    required
+                    class="form-control"
+                    [(ngModel)]="options.project.title"
+                  />
                 </div>
-            </div>
+                <div class="form-group">
+                  <label for="desc">Description :</label>
+                  <textarea
+                    rows="15"
+                    name="desc"
+                    required
+                    class="form-control"
+                    [(ngModel)]="options.project.description"
+                  >
+description ....</textarea
+                  >
+                </div>
+                <div *ngIf="options.formType == 'Ajout'" class="form-group">
+                  <label for="domaine">Domaine(s):</label><br />
+                  <div *ngFor="let d of options.domains; let i = index">
+                    <input
+                      type="checkbox"
+                      [(ngModel)]="options.checkedDomains[i]"
+                      (ngModelChange)="options.getCategories()"
+                      name="{{ d }}"
+                    />&nbsp;{{ d }}
+                  </div>
+                </div>
+                <label>Catégories:</label>
+                <div class="form-group checkbox-button-group">
+                  <div
+                    *ngFor="let c of options.categories; let i = index"
+                    class="checkbox-button cat"
+                  >
+                    <div *ngIf="!options.project.categories?.includes(c.name)">
+                      <input
+                        type="checkbox"
+                        [(ngModel)]="options.checkedCategories[i]"
+                        (ngModelChange)="options.updateSelectedCategories()"
+                        name="category"
+                      />
+                      <label>{{ c.name }}</label>
+                    </div>
+                  </div>
+                  <div
+                    *ngFor="
+                      let c of options.project?.categories
+                        ? options.project?.categories?.split(',')
+                        : [];
+                      let i = index
+                    "
+                    class="checkbox-button cat"
+                    (change)="options.removeCategory(c)"
+                  >
+                    <input type="checkbox" checked name="category" />
+                    <label>{{ c }}</label>
+                  </div>
+                  <div
+                    *ngIf="options.formType == 'Modification'"
+                    class="checkbox-button cat"
+                  >
+                    <label
+                      ><button
+                        data-toggle="collapse"
+                        href="#addcategories"
+                        class="addcat"
+                      >
+                        +
+                      </button></label
+                    >
+                  </div>
+                  <div id="addcategories" class="panel-collapse collapse">
+                    <div class="panel-body">
+                      <label for="domaine">Domaine(s):</label><br />
+                      <div *ngFor="let d of options.domains; let i = index">
+                        <input
+                          type="checkbox"
+                          [(ngModel)]="options.checkedDomains[i]"
+                          (ngModelChange)="options.getCategories()"
+                          name="domaine"
+                        />&nbsp;{{ d }}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="alert alert-danger"
+                role="alert"
+                *ngIf="options.alert"
+              >
+                <strong>Échec !</strong> {{ options.alert }}
+              </div>
+              <div
+                class="alert alert-success"
+                role="alert"
+                *ngIf="options.success"
+              >
+                <strong>Succès !</strong> {{ options.success }}
+              </div>
+              <button type="submit" class="btn btn-primary">
+                {{ options.formType == "Ajout" ? "proposer" : "modifier" }}
+              </button>
+            </form>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </div>
