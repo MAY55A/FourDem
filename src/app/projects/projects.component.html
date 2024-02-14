@@ -1,95 +1,34 @@
 <div class="filters">
   <div>
     <label>Domaine :</label>&nbsp;&nbsp;
-    <select>
-      <option>Tous</option>
-      <option>IT</option>
-      <option>Comptabilité</option>
-      <option>Influence</option>
+    <select [(ngModel)]="domain" (change)="getCategories()">
+      <option *ngFor="let d of domains" [value]="d">{{d}}</option>
     </select>
   </div>
   <div>
     <label>catégorie :</label>&nbsp;&nbsp;
-    <select>
+    <select [disabled]="domain=='Tous'" [(ngModel)]="category" (change)="getProjects()">
       <option>Tous</option>
-      <option>categorie 1</option>
-      <option>categorie 2</option>
-      <option>categorie 3</option>
+      <option *ngFor="let c of categories" [value]="c.name">{{c.name}}</option>
     </select>
   </div>
-  <input type="text" placeholder="chercher un projet ..." />
+  <input type="text" placeholder="chercher un projet ..." [(ngModel)]="searchValue" (ngModelChange)="search()"/>
 </div>
+<div class="empty" *ngIf="projects.length == 0">Aucun Projet</div>
 <div class="projects">
-  <div class="project">
+  <div class="project" *ngFor="let p of projects">
     <div class="project-header">
-      <a routerLink="../projet" class="title">creation d'un siteweb</a>
-      <p class="date">publié le 6 janvier 2024</p>
+      <a [routerLink]="['projet/',p.id]" class="title">{{p.title}}</a>
+      <p class="date">publié {{ p.publishedAt | date: 'à HH:mm, le yyyy/MM/dd' }}</p>
     </div>
     <div>
-        <p class="description">description: sdf sdf ljjlk hjhjb jlkl. dsfsdsq f fsdf reg fsqdf, ttr erth zrt.trgfgf, trt tg rggff rtgtrhthgg.</p>
+        <p class="description">{{p.description.substr(0,200)}}<a [routerLink]="['projet/',p.id]">...</a></p>
         <ul class="services">
-            <li class="service">développement web</li>
-            <li class="service">développement web</li>
-            <li class="service">développement web</li>
-        </ul>
+          <li *ngFor="let c of p.categories.split(',')" class="service">{{c}}</li>
+      </ul>
     </div>
-    <div class="infos">
-        <img src="../../assets/icons/defaultuser.png">
-      <p>11 propositions</p>
-    </div>
-  </div>
-  <div class="project">
-    <div class="project-header">
-      <a routerLink="['../projet']" class="title">creation d'un siteweb</a>
-      <p class="date">publié le 1 janvier 2024</p>
-    </div>
-    <div>
-        <p class="description">description: sdf sdf ljjlk hjhjb jlkl. dsfsdsq f fsdf reg fsqdf, ttr erth zrt.trgfgf, trt tg rggff rtgtrhthgg.</p>
-        <ul class="services">
-            <li class="service">développement web</li>
-            <li class="service">développement web</li>
-            <li class="service">développement web</li>
-        </ul>
-    </div>
-    <div class="infos">
-    <img src="../../assets/icons/defaultuser.png">
-      <p>11 propositions</p>
-    </div>
-  </div>
-  <div class="project">
-    <div class="project-header">
-      <a routerLink="['../projet']" class="title">creation d'un siteweb</a>
-      <p class="date">publié le 1 janvier 2024</p>
-    </div>
-    <div>
-        <p class="description">description: sdf sdf ljjlk hjhjb jlkl. dsfsdsq f fsdf reg fsqdf, ttr erth zrt.trgfgf, trt tg rggff rtgtrhthgg.</p>
-        <ul class="services">
-            <li class="service">développement web</li>
-            <li class="service">développement web</li>
-            <li class="service">développement web</li>
-        </ul>
-    </div>
-    <div class="infos">
-    <img src="../../assets/icons/defaultuser.png">
-      <p>11 propositions</p>
-    </div>
-  </div>
-  <div class="project">
-    <div class="project-header">
-      <a routerLink="['../projet']" class="title">creation d'un siteweb</a>
-      <p class="date">publié le 1 janvier 2024</p>
-    </div>
-    <div>
-        <p class="description">description: sdf sdf ljjlk hjhjb jlkl. dsfsdsq f fsdf reg fsqdf, ttr erth zrt.trgfgf, trt tg rggff rtgtrhthgg.</p>
-        <ul class="services">
-            <li class="service">développement web</li>
-            <li class="service">développement web</li>
-            <li class="service">développement web</li>
-        </ul>
-    </div>
-    <div class="infos">
-    <img src="../../assets/icons/defaultuser.png">
-      <p>5 propositions</p>
-    </div>
+    <a class="infos" [routerLink]="['/profile/',p.proposerId]">
+        <img [src]='["../../assets/images/users/" + p.proposerId+ ".jpg"]' onerror="this.src='../../assets/icons/defaultuser.png'" [title]="p.proposerName">
+    </a>
   </div>
 </div>

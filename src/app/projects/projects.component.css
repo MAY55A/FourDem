@@ -5,7 +5,15 @@
     justify-content: space-between;
 
     input {
-        height: 40px;
+        font-size: 14px;
+        width: 300px;
+        height: 35px;
+        color: #859098;
+        border-radius: 20px;
+        text-transform: capitalize;
+        font-weight: 500;
+        padding-left: 10px;
+        margin: 10px;
     }
 
     select {
@@ -18,5 +26,8 @@
 
     img {
         width: 50px;
+        border-radius: 30px;
+        border: 1px solid gray;
     }
+    min-width: 50px;
 }

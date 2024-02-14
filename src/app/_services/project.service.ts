@@ -11,12 +11,24 @@ import { environment } from 'src/environments/environment.development';
 export class ProjectService {
   constructor(private httpClient: HttpClient) { }
 
-  public getProjectsByUser(user: number) {
-    return this.httpClient.get<Project[]>(`${environment.apiUrl}/projects/${user}`);
+  public getProject(id: number) {
+    return this.httpClient.get<Project>(`${environment.apiUrl}/projects/${id}`);
   }
 
-  public getProjectsByCategory(cat: number) {
-    return this.httpClient.get<Project[]>(`${environment.apiUrl}/projects/${cat}`);
+  public getProjects() {
+    return this.httpClient.get<Project[]>(`${environment.apiUrl}/projects`);
+  }
+
+  public getProjectsByUser(user: number) {
+    return this.httpClient.get<Project[]>(`${environment.apiUrl}/projects/user/${user}`);
+  }
+
+  public getPublishedProjects() {
+    return this.httpClient.get<Project[]>(`${environment.apiUrl}/projects/published/all`);
+  }
+
+  public getProjectsByCategory(cat: string) {
+    return this.httpClient.get<Project[]>(`${environment.apiUrl}/projects/category/${cat}`);
   }
   
   public createProject(project: Project) {
