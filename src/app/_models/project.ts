@@ -1,7 +1,8 @@
 export class Project {
     id?: number;
     title!: string;
-    proposer!: number;
+    proposerId!: number;
+    proposerName!: string;
     status?: string;
     proposedAt?: Date;
     publishedAt?: Date;

@@ -7,6 +7,7 @@ export class User {
     description?: string;
     type!: string;
     domain?: string;
-    contacts?: string[];
-    skills?: string[];
+    contacts?: string;
+    tel?: string;
+    skills?: string = '';
 }
