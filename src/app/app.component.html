@@ -1,102 +1,135 @@
-
 <!-- top-area Start -->
 <section class="top-area">
   <div class="header-area">
     <!-- Start Navigation -->
-    <nav class="navbar navbar-default bootsnav  navbar-sticky navbar-scrollspy" data-minus-value-desktop="70"
-      data-minus-value-mobile="55" data-speed="1000" style=" position: fixed; width: 100%; height: 80px;">
-
+    <nav
+      class="navbar navbar-default bootsnav navbar-sticky navbar-scrollspy"
+      data-minus-value-desktop="70"
+      data-minus-value-mobile="55"
+      data-speed="1000"
+      style="position: fixed; width: 100%"
+    >
       <div class="container">
-
         <!-- Start Header Navigation -->
         <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-menu">
+          <button
+            type="button"
+            class="navbar-toggle"
+            data-toggle="collapse"
+            data-target="#navbar-menu"
+          >
             <i class="fa fa-bars"></i>
           </button>
           <a class="navbar-brand" routerLink="/accueil">four<span>dem</span></a>
-
-        </div><!--/.navbar-header-->
+        </div>
+        <!--/.navbar-header-->
         <!-- End Header Navigation -->
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse menu-ui-design" id="navbar-menu">
-          <ul class="nav navbar-nav navbar-right" data-in="fadeInDown" data-out="fadeOutUp">
-            <li class="scroll" routerLinkActive="active"><a routerLink="/accueil">accueil</a></li>
-            <li class="scroll" routerLinkActive="active"><a routerLink="/services">services disponibles</a></li>
-            <li class="scroll" routerLinkActive="active"><a routerLink="/projets">projets proposés</a></li>
-            <li *ngIf="!user" class="scroll" routerLinkActive="active"><a routerLink="/compte/connexion" class="login signup">se connecter</a></li>
-            <li *ngIf="!user" class="scroll" routerLinkActive="active"><a routerLink="/compte/creation1" class="login signin">s'inscrire</a></li>
-          </ul><!--/.nav -->
-        </div><!-- /.navbar-collapse -->
-      </div><!--/.container-->
-    </nav><!--/nav-->
+          <ul
+            class="nav navbar-nav navbar-right"
+            data-in="fadeInDown"
+            data-out="fadeOutUp"
+          >
+            <li class="scroll" routerLinkActive="active">
+              <a routerLink="/accueil">accueil</a>
+            </li>
+            <li class="scroll" routerLinkActive="active">
+              <a routerLink="/services">services disponibles</a>
+            </li>
+            <li class="scroll" routerLinkActive="active">
+              <a routerLink="/projets">projets proposés</a>
+            </li>
+            <li *ngIf="!user" class="scroll" routerLinkActive="active">
+              <a routerLink="/compte/connexion" class="login signup"
+                >se connecter</a
+              >
+            </li>
+            <li *ngIf="!user" class="scroll" routerLinkActive="active">
+              <a routerLink="/compte/creation1" class="login signin"
+                >s'inscrire</a
+              >
+            </li>
+          </ul>
+          <!--/.nav -->
+        </div>
+        <!-- /.navbar-collapse -->
+      </div>
+      <!--/.container-->
+    </nav>
+    <!--/nav-->
     <!-- End Navigation -->
-  </div><!--/.header-area-->
+  </div>
+  <!--/.header-area-->
   <div class="clearfix"></div>
   <div *ngIf="user" class="profile">
-    <a  routerLink="/profile/compte"><img src="../assets/images/home.jpg">
-    <h5>{{user.name}}</h5></a>
+    <a routerLink="/profile/compte"
+      ><img [src]='"../assets/images/users/"+ user.id + ".jpg"' onerror="this.src='../assets/icons/defaultuser.png'"/>
+      <h5>{{ user.name }}</h5></a
+    >
     <ul>
-      <li><a routerLink="/profile/compte"><i class="fa fa-user"></i>  compte</a></li>
-      <li><a routerLink="/profile/mes-projets"><i class="fa fa-folder"></i>  projets</a></li>
-      <li><a routerLink="/profile/notifications"><i class="fa fa-bell"></i>  notifications</a></li>
-      <li><a routerLink="/profile/paramètres"><i class="fa fa-gear"></i>  paramètres</a></li>
-      <li><a (click)="logout()"><i class="fa fa-sign-out"></i>  déconnexion</a></li>
+      <li>
+        <a routerLink="/profile/compte"><i class="fa fa-user"></i>  compte</a>
+      </li>
+      <li *ngIf="user.type == 'Demandeur'">
+        <a routerLink="/profile/mes-projets/publié"
+          ><i class="fa fa-folder"></i>  projets</a
+        >
+      </li>
+      <li *ngIf="user.type == 'Fournisseur'">
+        <a routerLink="/profile/mes-services"
+          ><i class="fa fa-briefcase"></i>  services</a
+        >
+      </li>
+      <li>
+        <a routerLink="/profile/notifications"
+          ><i class="fa fa-bell"></i>  notifications</a
+        >
+      </li>
+      <li>
+        <a routerLink="/profile/paramètres"
+          ><i class="fa fa-gear"></i>  paramètres</a
+        >
+      </li>
+      <li>
+        <a (click)="logout()"><i class="fa fa-sign-out"></i>  déconnexion</a>
+      </li>
     </ul>
   </div>
-
-</section><!-- /.top-area-->
+</section>
+<!-- /.top-area-->
 <!-- top-area End -->
 <div class="section">
   <router-outlet></router-outlet>
 </div>
 <!--footer start-->
 <footer id="footer" class="footer">
-  <div class="container">
-    <div class="footer-menu">
-      <div class="row">
-        <div class="col-sm-3">
-          <div class="navbar-header">
-            <a class="navbar-brand" routerLink="/">four<span>dem</span></a>
-          </div><!--/.navbar-header-->
-        </div>
-        <div class="col-sm-9">
-          <ul class="footer-menu-item">
-            <li class="scroll"><a href="#works">comment ça marche</a></li>
-            <li class="scroll"><a href="#">contact</a></li>
-            <li class="scroll"><a href="#">mon compte</a></li>
-          </ul><!--/.nav -->
-        </div>
-      </div>
-    </div>
-    <div class="hm-footer-copyright">
-      <div class="row">
-        <div class="col-sm-5">
-          <p>
-            &copy;copyright
-          </p><!--/p-->
-        </div>
-        <div class="col-sm-7">
-          <div class="footer-social">
-            <span><i class="fa fa-phone"> +1 (222) 777 8888</i></span>
-            <a href="#"><i class="fa fa-facebook"></i></a>
-            <a href="#"><i class="fa fa-twitter"></i></a>
-            <a href="#"><i class="fa fa-linkedin"></i></a>
-            <a href="#"><i class="fa fa-google-plus"></i></a>
-          </div>
-        </div>
-      </div>
-
-    </div><!--/.hm-footer-copyright-->
-  </div><!--/.container-->
-
+  <div class="navbar-header">
+    <a class="navbar-brand" routerLink="/">four<span>dem</span></a>
+  </div>
+  <p class="copyright">&copy;copyright</p>
+  <div class="footer-social">
+    <span><i class="fa fa-phone"> +1 (222) 777 8888</i></span>
+    <a href="#"><i class="fa fa-facebook"></i></a>
+    <a href="#"><i class="fa fa-twitter"></i></a>
+    <a href="#"><i class="fa fa-linkedin"></i></a>
+    <a href="#"><i class="fa fa-google-plus"></i></a>
+  </div>
   <div id="scroll-Top">
     <div class="return-to-top">
-      <i class="fa fa-angle-up " id="scroll-top" data-toggle="tooltip" data-placement="top" title=""
-        data-original-title="Back to Top" aria-hidden="true"></i>
+      <i
+        class="fa fa-angle-up"
+        id="scroll-top"
+        data-toggle="tooltip"
+        data-placement="top"
+        title=""
+        data-original-title="Back to Top"
+        aria-hidden="true"
+      ></i>
     </div>
-
-  </div><!--/.scroll-Top-->
-
-</footer><!--/.footer-->
+  </div>
+  <!--/.scroll-Top-->
+</footer>
+<!--/.footer-->
 <!--footer end-->

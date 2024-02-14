@@ -28,6 +28,6 @@ export class AppComponent implements OnInit{
 
   logout() {
     this.authService.removeToken();
-    this.router.navigate(['/compte/connexion']);
+    this.router.navigate(['/compte/connexion']).then(() => {location.reload();});
   }
 }

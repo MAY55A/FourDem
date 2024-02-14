@@ -7,12 +7,9 @@ import { ProjectsComponent } from './projects/projects.component';
 const routes: Routes = [
   {path:'', redirectTo: 'accueil', pathMatch: 'full'},
   {path: 'accueil', component: HomeComponent},
-  {path: 'projets', component: ProjectsComponent},
-  {path: 'projets/:domaine', component: ProjectsComponent},
-  {path: 'projets/:domaine/:categorie', component: ProjectsComponent},
+
   {path: 'services',component: ServicesComponent},
   {path: 'services/:domaine', component: ServicesComponent},
-  {path: 'services/:domaine/:categorie', component: ServicesComponent},
   {
     path: 'compte',
     loadChildren: ()=>import("./signing/signing.module").then((p)=>p.SigningModule)
@@ -20,6 +17,10 @@ const routes: Routes = [
   {
     path: 'profile',
     loadChildren: ()=>import("./profile/profile.module").then((p)=>p.ProfileModule)
+  },
+  {
+    path: 'projets',
+    loadChildren: ()=>import("./projects/projects.module").then((p)=>p.ProjectsModule)
   }
 ];
 
