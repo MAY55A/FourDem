@@ -11,26 +11,28 @@ import { AppComponent } from '../app.component';
 })
 export class ProfileComponent implements OnInit{
   user!: User;
-
-  constructor(private userService: UserService, private app: AppComponent, private route: ActivatedRoute) {}
+  id?: string | null;
+  constructor(private userService: UserService, public app: AppComponent, private route: ActivatedRoute) {}
 
   ngOnInit() {
-    this.loadProfile();
+    this.id = this.route.snapshot.paramMap.get("id");
+    console.log(this.id)
+    if(!this.id)
+      this.user = this.app.user!;
+    else
+      this.loadProfile();
   }
 
   loadProfile() {
-    if(this.app.user)
-      this.user = this.app.user;
-    else {
-      var email = this.route.snapshot.paramMap.get("email")
-      console.error('visiting profile ...', email);
-      if(email)
-        this.userService.readUser(email).subscribe(
-          (data) => {
-            this.user = data;
-          }
+      console.error('visiting profile ...');
+      this.userService.readUserById(Number(this.id)).subscribe(
+        (data) => {
+          console.log(data);
+          this.user = data;
+        }
+        ,(error) => {
+          console.log(error);
+        }
       )
     }
-  }
-
 }

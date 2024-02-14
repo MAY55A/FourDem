@@ -9,30 +9,33 @@
             <a routerLink="compte" routerLinkActive="active"><i class="fa fa-user"></i> Compte</a>
           </li>
           <!-- Dropdown-->
-          <li class="panel panel-default" id="dropdown">
-            <a data-toggle="collapse"  routerLink="mes-projets" routerLinkActive="active">
+          <li  *ngIf="user.type=='Demandeur'" class="panel panel-default" id="dropdown">
+            <a data-toggle="collapse" href="#dropdown-lvl1">
               <i class="fa fa-folder"></i> Projets
-              <span class="caret"><a href="#dropdown-lvl1"></a></span>
+              <span class="caret" style="color: black;"><a href=""></a></span>
             </a>
             <!-- Dropdown level 1 -->
             <div id="dropdown-lvl1" class="panel-collapse collapse">
               <div class="panel-body">
                 <ul class="nav navbar-nav">
-                  <li><a routerLink="mes-projets">+ Proposer un projet</a></li>
-                  <li><a routerLink="mes-projets">Projets publiés</a></li>
-                  <li><a routerLink="mes-projets">Projets proposés</a></li>
-                  <li><a routerLink="mes-projets">Projets terminés</a></li>
+                  <li *ngIf="app.user?.id == user.id"><a routerLink="mes-projets/publié" routerLinkActive="active">Projets publiés</a></li>
+                  <li *ngIf="app.user?.id != user.id"><a routerLink="projets/publié" routerLinkActive="active">Projets publiés</a></li>
+                  <li *ngIf="app.user?.id == user.id"><a routerLink="mes-projets/proposé" routerLinkActive="active">Projets proposés</a></li>
+                  <li *ngIf="app.user?.id == user.id"><a routerLink="mes-projets/terminé" routerLinkActive="active">Projets terminés</a></li>
+                  <li *ngIf="app.user?.id != user.id"><a routerLink="projets/terminé" routerLinkActive="active">Projets terminés</a></li>
+                  <li *ngIf="app.user?.id == user.id"><a routerLink="mes-projets/refusé" routerLinkActive="active">Projets refusés</a></li>
                 </ul>
               </div>
             </div>
           </li>
-          <li>
-            <a routerLink="mes-projets"><i class="fa fa-heart"></i> Services</a>
+          <li *ngIf="user.type=='Fournisseur'">
+            <a *ngIf="app.user?.id == user.id" routerLink="mes-services" routerLinkActive="active"><i class="fa fa-briefcase"></i> Services</a>
+            <a *ngIf="app.user?.id != user.id" routerLink="services" routerLinkActive="active"><i class="fa fa-briefcase"></i> Services</a>
         </li>
-        <li>
+        <li *ngIf="app.user?.id == user.id">
             <a routerLink="notifications" routerLinkActive="active"><i class="fa fa-bell"></i> Notifications</a>
         </li>
-        <li>
+        <li *ngIf="app.user?.id == user.id">
           <a routerLink="paramètres" routerLinkActive="active"><i class="fa fa-gear"></i> Paramètres</a>
       </li>
         </ul>

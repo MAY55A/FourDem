@@ -4,7 +4,8 @@ import { ProfileComponent } from './profile.component';
 import { MyAccountComponent } from './my-account/my-account.component';
 import { MyProjectsComponent } from './my-projects/my-projects.component';
 import { NotificationsComponent } from './notifications/notifications.component';
-import { ProjectComponent } from './project/project.component';
+import { SettingsComponent } from './settings/settings.component';
+import { MyServicesComponent } from './my-services/my-services.component';
 
 const routes: Routes = [
   {
@@ -13,19 +14,22 @@ const routes: Routes = [
     children: [
       {path: 'compte', component: MyAccountComponent},
       {path: 'mes-projets', component: MyProjectsComponent},
+      {path: 'mes-services', component: MyServicesComponent},
       {path: 'notifications', component: NotificationsComponent},
-      {path: 'mes-projets/:id', component: ProjectComponent},
+      {path: 'paramètres', component: SettingsComponent},
+      {path: 'mes-projets/:status', component: MyProjectsComponent},
       {path: '', redirectTo: 'compte', pathMatch: 'full'}
     ]
   },
   {
-    path: ':email',
+    path: ':id',
     component: ProfileComponent,
     children: [
       {path: 'compte', component: MyAccountComponent},
       {path: 'projets', component: MyProjectsComponent},
-      {path: 'projets/:id', component: ProjectComponent},
-      {path: ':email', redirectTo: 'compte', pathMatch: 'full'}
+      {path: 'projets/:status', component: MyProjectsComponent},
+      {path: 'services', component: MyServicesComponent},
+      {path: '', redirectTo: 'compte', pathMatch: 'full'}
     ]
   }
 ];
