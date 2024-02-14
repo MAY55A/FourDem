@@ -1,0 +1,180 @@
+.project-page {
+  padding: 50px;
+}
+h5 {
+  margin-top: 20px;
+  color: #30374f;
+  font-size: 15px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+}
+.header span {
+  color: #636f99;
+  text-decoration: none;
+  font-size: 30px;
+  cursor: pointer;
+  &:hover {
+    color: brown;
+  }
+}
+.project.single {
+  background-color: rgba(214, 221, 239, 0.8);
+  flex-direction: column;
+  padding: 2%;
+}
+.info {
+    p {
+        text-align: left;
+    }
+}
+.project .owner {
+    position: absolute;
+    text-align: center;
+    right: 80px;
+  img {
+    width: 50px;
+    height: 50px;
+    border-radius: 30px;
+  }
+  p {
+    position: relative;
+  }
+}
+
+.project .description {
+  margin-top: 5%;
+  padding-left: 5%;
+}
+.project .services {
+  margin-top: 10px;
+  width: 100%;
+}
+.service {
+  position: relative;
+}
+.service #add {
+  color: #636f99;
+  font-size: 130%;
+}
+
+.action {
+  display: none;
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  font-size: 18px;
+
+  &.choose {
+    color: rgba(49, 139, 16, 0.7);
+    right: 30px;
+  }
+
+  &.remove {
+    color: rgba(139, 16, 37, 0.7);
+  }
+}
+.add {
+  display: inline;
+  color: aliceblue;
+  font-size: 20px;
+}
+.proposition:hover .action {
+  display: inline;
+}
+
+.propositions {
+  margin: 2%;
+}
+.proposition {
+  position: relative;
+  background-color: hsla(218, 45%, 76%, 0.9);
+  border-radius: 15px;
+  padding: 2%;
+  margin-top: 2%;
+}
+.proposer {
+  margin-bottom: 5px;
+  a {
+    display: inline;
+  }
+  img {
+    float: left;
+    height: 50px;
+    width: 50px;
+    border-radius: 30px;
+  }
+}
+.user-info {
+  margin-left: 60px;
+}
+.user-info h4 {
+  margin: 5px;
+}
+.user-info p {
+  color: rgb(18, 18, 19);
+  font-size: 15px;
+  font-style: italic;
+}
+.comment {
+  margin: 10px;
+}
+.comment p {
+  color: rgb(73, 76, 78);
+}
+
+textarea {
+  background-color: hsla(218, 48%, 82%, 0.9);
+  border: none;
+  border-radius: 10px;
+  padding: 5px;
+  width: 100%;
+  height: 100px;
+}
+
+.skill {
+
+  label {
+    border-radius: 20px;
+  }
+}
+
+.addskill {
+  margin-top: 10px;
+  button {
+    border: 1px solid hsla(211, 64%, 13%, 0.9);
+    border-radius: 15px;
+    padding: 0px 10px;
+    font-size: 18px;
+    margin-left: 20px;
+    height: 30px;
+    &:hover {
+      color: aliceblue;
+      background-color: hsla(211, 64%, 13%, 0.9);
+    }
+  }
+
+  input {
+    width: 80px;
+    height: 30px;
+    background-color: rgb(217, 229, 240);
+    border-radius: 20px;
+    color: #30374f;
+    padding-left: 4px;
+    margin: 0;
+    transition: 0.5s;
+    &:hover,
+    &:focus {
+      width: 150px;
+      transition: 0.5s;
+    }
+  }
+}
+
+.submit {
+  position: relative;
+  left: 100%;
+  margin-left: -100px;
+}
