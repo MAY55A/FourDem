@@ -1,17 +1,16 @@
 <form class="welcome-hero-form">
-    <input type="text" placeholder="chercher un service ..." />
-    <button class="welcome-hero-btn">
-      chercher <i data-feather="search"></i>
-    </button>
+    <input type="text" placeholder="chercher un service ..." [(ngModel)]="searchValue" name="search" (ngModelChange)="search()"/>
     <div class="domaine">
         domaine :&nbsp;&nbsp;
-        <select>
+        <select (change)="changeDomain()" [(ngModel)]="domain" name="domaine">
+            <option value="">Tous</option>
             <option value="it">IT</option>
             <option value="comptabilité">Comptabilité</option>
             <option value="influence">Influence</option>
         </select>
     </div>
 </form>
+<!--
 <div class="sliderBox categories">
     <button type="button" class="left fa fa-chevron-left"></button>
     <div class="sliderWrap">
@@ -32,96 +31,20 @@
     </div>
     <button type="button" class="right fa fa-chevron-right"></button>
 </div>
+-->
+<div class="empty" *ngIf="services.length == 0">Aucun service disponible</div>
 <div class="services">
-    <div class="service">
-        <a class="info" routerLink="/profile">
-            <img src="../../assets/icons/defaultuser.png">
-            <h5>nom fournisseur</h5>
+    <div class="service" *ngFor="let s of services">
+        <a class="info" [routerLink]="['/profile',s.proposerId]">
+            <img [src]="'../../assets/images/users/' + s.proposerId + '.jpg'" onerror="this.src='../../assets/icons/defaultuser.png'">
+            <h5>{{s.proposerName}}</h5>
             40 <i class="fa fa-thumbs-up"></i>
         </a>
-        <div>
-            <p class="desc">dfgdf dqfgdf qdfgqdf gqdfgdg dqgqdg qdffgdqg qdffgdg dgdqg .gfg , yyt htrhh .Mon Service</p>
+        <div style="width:80%">
+            <p class="desc">{{s.description}}</p>
             <h5>compétances</h5>
             <ul class="skills">
-                <li>compétance</li>
-                <li>compétance</li>
-                <li>compétance</li>
-                <li>compétance</li>
-                <li>compétance</li>
-
-            </ul>
-        </div>
-    </div>
-    <div class="service">
-        <a class="info" routerLink="/profile">
-            <img src="../../assets/icons/defaultuser.png">
-            <h5>nom fournisseur</h5>
-            40 <i class="fa fa-thumbs-up"></i>
-        </a>
-        <div>
-            <p class="desc">dfgdf dqfgdf qdfgqdf gqdfgdg dqgqdg qdffgdqg qdffgdg dgdqg .gfg , yyt htrhh .Mon Service</p>
-            <h5>compétances</h5>
-            <ul class="skills">
-                <li>compétance</li>
-                <li>compétance</li>
-                <li>compétance</li>
-                <li>compétance</li>
-                <li>compétance</li>
-
-            </ul>
-        </div>
-    </div>
-    <div class="service">
-        <a class="info" routerLink="/profile">
-            <img src="../../assets/icons/defaultuser.png">
-            <h5>nom fournisseur</h5>
-            40 <i class="fa fa-thumbs-up"></i>
-        </a>
-        <div>
-            <p class="desc">dfgdf dqfgdf qdfgqdf gqdfgdg dqgqdg qdffgdqg qdffgdg dgdqg .gfg , yyt htrhh .Mon Service</p>
-            <h5>compétances</h5>
-            <ul class="skills">
-                <li>compétance</li>
-                <li>compétance</li>
-                <li>compétance</li>
-                <li>compétance</li>
-                <li>compétance</li>
-            </ul>
-        </div>
-    </div>
-    <div class="service">
-        <a class="info" routerLink="/profile">
-            <img src="../../assets/icons/defaultuser.png">
-            <h5>nom fournisseur</h5>
-            40 <i class="fa fa-thumbs-up"></i>
-        </a>
-        <div>
-            <p class="desc">dfgdf dqfgdf qdfgqdf gqdfgdg dqgqdg qdffgdqg qdffgdg dgdqg .gfg , yyt htrhh .Mon Service</p>
-            <h5>compétances</h5>
-            <ul class="skills">
-                <li>compétance</li>
-                <li>compétance</li>
-                <li>compétance</li>
-                <li>compétance</li>
-                <li>compétance</li>
-            </ul>
-        </div>
-    </div>
-    <div class="service">
-        <a class="info" routerLink="/profile">
-            <img src="../../assets/icons/defaultuser.png">
-            <h5>nom fournisseur</h5>
-            40 <i class="fa fa-thumbs-up"></i>
-        </a>
-        <div>
-            <p class="desc">dfgdf dqfgdf qdfgqdf gqdfgdg dqgqdg qdffgdqg qdffgdg dgdqg .gfg , yyt htrhh .Mon Service</p>
-            <h5>compétances</h5>
-            <ul class="skills">
-                <li>compétance</li>
-                <li>compétance</li>
-                <li>compétance</li>
-                <li>compétance</li>
-                <li>compétance</li>
+                <li *ngFor="let c of ( s.skills ? s.skills.split(' ') : [])">{{replace(c)}}</li>
             </ul>
         </div>
     </div>
