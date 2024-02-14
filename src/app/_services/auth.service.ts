@@ -30,12 +30,12 @@ export class AuthService {
     localStorage.removeItem(this.tokenKey);
   }
 
-  getUserEmailFromToken(): string | null {
+  getUserIdFromToken(): number | null {
     const token = this.getToken();
     if (token) {
       try {
         const payload = JSON.parse(atob(token.split('.')[1]));
-        return payload.email;
+        return Number(payload.sub);
       } catch (error) {
         console.error('Error decoding JWT payload:', error);
       }

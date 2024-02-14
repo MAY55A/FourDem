@@ -11,16 +11,20 @@ export class UserService {
 
   constructor(private httpClient: HttpClient, private authService: AuthService) { }
 
-  public readUser(email: string) {
-    return this.httpClient.get<User>(`${environment.apiUrl}/Users/${email}`);
+  public readUserByEmail(email: string) {
+    return this.httpClient.get<User>(`${environment.apiUrl}/Users/email:${email}`);
+  }
+
+  public readUserById(id: number) {
+    return this.httpClient.get<User>(`${environment.apiUrl}/Users/id:${id}`);
   }
 
   public getProfile() {
-    const useremail = this.authService.getUserEmailFromToken();
-    if(useremail)
-      return this.readUser(useremail);
+    const userid = this.authService.getUserIdFromToken();
+    if(userid)
+      return this.readUserById(userid);
     else
-      throw new Error('User email not found in token.');
+      throw new Error('User id not found in token.');
   }
   public readUsers() {
     return this.httpClient.get<User[]>(`${environment.apiUrl}/Users`);
@@ -30,8 +34,8 @@ export class UserService {
     return this.httpClient.post<User>(`${environment.apiUrl}/Users/create`, User);
   }
 
-  public updateUser(User: User) {
-    return this.httpClient.put<User>(`${environment.apiUrl}/Users/${User.id}/update`, User);
+  public updateUser(user: any) {
+    return this.httpClient.put<any>(`${environment.apiUrl}/Users/${user.id}/update`, user);
   }
 
   public deleteUser(id: number) {
