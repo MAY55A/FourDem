@@ -1,47 +1,73 @@
 <div class="profile-container">
-        <div class="menu-box block"> <!-- MENU BOX (LEFT-CONTAINER) -->
-            <h2 class="titular">Les services les plus demandés</h2>
-            <ul class="menu-box-menu">
-                <li>
-                    <a class="menu-box-tab" href="#6">
-                        développement web
-                    </a>                            
-                </li>
-                <li>
-                    <a class="menu-box-tab" href="#8">
-                        maintenance web
-                    </a>                            
-                </li>
-                <li>
-                    <a class="menu-box-tab" href="#10">
-                        APIs et integrations
-                    </a>                            
-                </li>                      
-            </ul>
-        </div>
+  <div class="menu-box block" *ngIf="user.type=='Fournisseur'">
+    <!-- MENU BOX (LEFT-CONTAINER) -->
+    <h2 class="titular">Compétances</h2>
+    <ul class="menu-box-menu">
+      <li *ngFor="let s of skills; let i=index;">
+        <p class="menu-box-tab"> {{replace(s)}} </p>
+        <a *ngIf="app.user?.id == user.id" (click)="removeSkill(i)"> <i class="fa fa-remove"></i> </a>
+      </li>
+      <li class="newSkill" *ngIf="app.user?.id == user.id">
+        <input type="text" name="skill" placeholder="ajouter compétance" [(ngModel)]="newSkill">
+        <a (click)="addSkill()"> + </a>
+      </li>
+    </ul>
+  </div>
 
-        <div class="profile block"> <!-- PROFILE (MIDDLE-CONTAINER) -->
-            <a class="add-button" href="#28"><span class="icon entypo-plus scnd-font-color"></span></a>
-            <div class="profile-picture big-profile-picture clear">
-                <img width="150px" src="../../assets/icons/defaultuser.png" >
-            </div>
-            <h1 class="user-name">{{user.name}}</h1>
-            <div class="profile-description">
-                <p class="scnd-font-color">{{user.description}}</p>
-            </div>
-            <ul class="profile-options horizontal-list">
-                <li class="missions">53<br> <img title="projets" src="../../assets/icons/projet.png" width="30px"></li>
-                <li class="likes">41<br> <img title="satisfactions" src="../../assets/icons/satisfaction.png" width="30px"></li>
-                <li class="dislikes">4<br> <img title="dissatisfactions" src="../../assets/icons/dissatisfaction.png" width="30px"></li>
-            </ul>
-        </div>
+  <div class="profile block">
+    <!-- PROFILE (MIDDLE-CONTAINER) -->
+    <div class="profile-picture big-profile-picture clear">
+      <img width="150px" [src]="'../../assets/images/users/' + user.id + '.jpg'" onerror="this.src='../../assets/icons/defaultuser.png'"/>
+    </div>
+    <h1 class="user-name">{{ user.name }}</h1>
+    <div class="profile-description">
+      <p class="scnd-font-color">{{ user.description }}</p>
+    </div>
+    <ul class="profile-options horizontal-list">
+      <li class="missions">
+        53<br />
+        <img title="projets" src="../../assets/icons/projet.png" width="30px" />
+      </li>
+      <li class="likes">
+        41<br />
+        <img
+          title="satisfactions"
+          src="../../assets/icons/satisfaction.png"
+          width="30px"
+        />
+      </li>
+      <li class="dislikes">
+        4<br />
+        <img
+          title="dissatisfactions"
+          src="../../assets/icons/dissatisfaction.png"
+          width="30px"
+        />
+      </li>
+    </ul>
+  </div>
 
-        <div class="join-newsletter block"> <!-- JOIN NEWSLETTER (RIGHT-CONTAINER) -->
-            <h2 class="titular">Contact</h2>
-            <ul class="social"> <!-- SOCIAL (MIDDLE-CONTAINER) -->
-                <li><a href="#50"><div class="facebook icon"><img src="../../assets/icons/facebook.png" width="40px"></div><h2 class="facebook titular">FACEBOOK</h2></a></li>
-                <li><a href="#51"><div class="twitter icon"><img src="../../assets/icons/twitter.png" width="40px"></div><h2 class="twitter titular">TWITTER</h2></a></li>
-                <li><a href="#52"><div class="google icon"><img src="../../assets/icons/google.png" width="40px"></div><h2 class="google titular">GOOGLE</h2></a></li>
-            </ul>
-        </div>
+  <div class="join-newsletter block">
+    <h2 class="titular">Contact</h2>
+    <div *ngIf="!user.contacts">aucun contact ajouté encore</div>
+    <ul class="social">
+      <li *ngFor="let c of user.contacts ? user.contacts.split(' ') : []">
+        <a [href]="'http://' + c">
+          <div
+            *ngIf="getSocial(c) != 'default'"
+            [class]="getSocial(c) + ' icon'"
+          >
+            <img
+              [src]="'../../assets/icons/socials/' + getSocial(c) + '.png'"
+              width="40px"
+            />
+          </div>
+          <h2 [class]="getSocial(c) + ' titular'">
+            {{ getSocial(c) == "default" ? c : getSocial(c) }}
+          </h2>
+        </a>
+      </li>
+    </ul>
+    <a *ngIf="app.user?.id == user.id" class="add" routerLink="../paramètres" fragment="ajoutercontact" data-toggle="collapse">ajouter</a>
+  </div>
 </div>

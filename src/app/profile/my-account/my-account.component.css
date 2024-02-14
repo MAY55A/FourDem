@@ -1,224 +1,398 @@
 .profile-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
-  }
-  .profile {
-    width: 400px;
-  }
-.profile-menu {
-    height: 80px;
-    padding-right: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
 }
-    .profile-menu p {
-        font-size: 17px;
-        display: inline-block;
-        line-height: 76px;
-        margin: 0;
-        padding-right: 10px;
-    }
-        .profile-menu a {
-            padding-left: 5px;
-        }
-            .profile-menu a:hover {
-                text-decoration: none;
-            }
-    .small-profile-picture {
-        display: inline-block;
-        vertical-align: middle;				
-    }
-    .left-container {}
-    .menu-box {
-        width: 400px;
-    }
-        .menu-box .titular {
-            background: #607dd4;
-        }
-        .menu-box-menu .icon {
-            display: inline-block;
-            vertical-align: top;
-            width: 28px;
-            margin-left: 20px;
-            margin-right: 15px;
-        }
-        p {
-            padding: 0;
-            margin: 0;
-            color: #FFF;
-        }
-        
-        .rank {
-            border-radius: 30px;
-            background: #50597b;
-            padding: 10px 5px;
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            -webkit-transition: all .3s;
-            transition: all .3s;
-        }
-        .high-rank {
-            border: 2px solid #77DD77;
-        }
-        .med-rank {
-            border: 2px solid #FFB347;
-        }
-        .low-rank {
-            border: 2px solid #FF6961;
-        }
-        .rank p {
-            font-size: 10px;
-            line-height: 100%;
-        }
-        .menu-box-menu li{
-            height: 60px;
-            position: relative;										
-        }
-        .menu-box-tab {
-            line-height: 60px;
-            display: block;
-            padding-left: 5%;
-            border-bottom: 1px solid #1f253d;
-            -webkit-transition: background .2s;
-            transition: background .2s;
-        }
-            .menu-box-tab:hover {
-                background: #50597b;
-                border-top: 1px solid #1f253d;
-                text-decoration: none;
-            }
-            .menu-box-tab:hover .icon {
-                color: #fff;
-            }
-            .middle-container {
-                margin: 0 25px;			
-            }
+.profile {
+  width: 400px;
+  padding-top: 20px;
+}
+.profile-menu {
+  height: 80px;
+  padding-right: 20px;
+}
+.profile-menu p {
+  font-size: 17px;
+  display: inline-block;
+  line-height: 76px;
+  margin: 0;
+  padding-right: 10px;
+}
+.profile-menu a {
+  padding-left: 5px;
+}
+.profile-menu a:hover {
+  text-decoration: none;
+}
+.small-profile-picture {
+  display: inline-block;
+  vertical-align: middle;
+}
+.left-container {
+}
+.menu-box {
+  width: 300px;
+}
+.menu-box .titular {
+  background: #314689;
+  color: aliceblue;
+}
+.menu-box-menu .icon {
+  display: inline-block;
+  vertical-align: top;
+  width: 28px;
+  margin-left: 20px;
+  margin-right: 15px;
+}
 
-                    .add-button .icon {
-                        float: right;
-                        line-height: 18px;
-                        width: 23px;					
-                        border: 2px solid;
-                        border-radius: 100%;
-                        font-size: 18px;
-                        text-align: center;
-                        margin: 10px;					
-                    }
-                        .add-button .icon:hover {
-                            color: #e64c65;
-                            border-color: #e64c65;
-                        }
-                    .user-name {
-                        margin: 25px 0 16px;
-                        text-align: center;
-                    }
-                    .profile-description {
-                        width: 210px;
-                        margin: 0 auto;
-                        text-align: center;
-                    }
-                    .profile-options {
-                        padding-top: 23px;
-                    }
-                        .profile-options li {
-                            border-left: 1px solid #1f253d;
-                            width: 33.33%;
-                            color: white;
-                            text-align: center;
-                            padding-top: 10px;
-                        }
-                                .profile-options a:hover {
-                                    text-decoration: none;
-                                    background: #50597b;
-                                }
-                                .profile-options img {
-                                    filter: invert(100%);
-                                    margin-top: 10px;
-                                }
-                                .profile-options .missions {
-                                    border-top: 4px solid #fcb150;
-                                }
-                                .profile-options .likes {
-                                    border-top: 4px solid #11a8ab;
-                                }
-                                .profile-options .dislikes {
-                                    border-top: 4px solid #e64c65;
-                                }
-    
-            /********************************************* RIGHT CONTAINER ****************************************/
-            .right-container {}
-                .join-newsletter {
-                    padding: 5%;
-                    text-align: center;
-                }
+.rank {
+  border-radius: 30px;
+  background: #50597b;
+  padding: 10px 5px;
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+}
+.high-rank {
+  border: 2px solid #77dd77;
+}
+.med-rank {
+  border: 2px solid #ffb347;
+}
+.low-rank {
+  border: 2px solid #ff6961;
+}
+.rank p {
+  font-size: 10px;
+  line-height: 100%;
+}
+.menu-box-menu li {
+  height: 60px;
+  position: relative;
+}
+.menu-box-tab ~ a {
+  color: transparent;
+  position: absolute;
+  right: 5px;
+  top: 1px;
+  font-size: 15px;
+  cursor: pointer;
+  &:hover {
+    color: rgb(149, 28, 28);
+  }
+}
+  .menu-box-tab:hover ~ a {
+    color: rgb(149, 28, 28);
+  }
+.menu-box-tab {
+  line-height: 60px;
+  display: block;
+  color: #1f253d;
+  font-weight: bold;
+  padding-left: 5%;
+  border-bottom: 1px solid #1f253d;
+  -webkit-transition: background 0.2s;
+  transition: background 0.2s;
+}
+.menu-box-tab:hover {
+  background: #636d94;
+  border-top: 1px solid #1f253d;
+  text-decoration: none;
+}
+.menu-box-tab:hover .icon {
+  color: #fff;
+}
+.newSkill {
+  color: #1f253d;
+  input {
+    line-height: 60px;
+    background-color: transparent;
+    border: none;
+    width: 100%;
+    padding-left: 5%;
 
-                            .social li {
-                                margin-left: 10px;
-                            }
-                            .social a {
-                                line-height: 30px;			
-                            }
-                                .social a:hover {
-                                    text-decoration: none;
-                                }
-                                .social .titular {
-                                    border-radius: 5px;
-                                    width: 200px;
-                                    margin: 10px;
-                                    font-size: 13px;
-                                }
-                                .social .icon img{
-                                    margin: 10px;
-                                }
-                                    .social .facebook {
-                                        background: #3468af;
-                                        -webkit-transition: background .3s;
-                                        transition: background .3s;
-                                    }
-                                        .social a:hover .facebook {
-                                            background: #1a4e95;
-                                        }
-                                        .social a:hover .icon.facebook {
-                                            background: #3468af;
-                                        }
-                                    .social .twitter {
-                                        background: #4fc4f6;
-                                        -webkit-transition: background .3s;
-                                        transition: background .3s;
-                                    }
-                                        .social a:hover .twitter {
-                                            background: #35aadc;
-                                        }
-                                        .social a:hover .icon.twitter {
-                                            background: #4fc4f6;
-                                        }
-                                    .social .google {
-                                        background: #e64c65;
-                                        -webkit-transition: background .3s;
-                                        transition: background .3s;
-                                    }
-                                        .social a:hover .google {
-                                            background: #cc324b;
-                                        }
-                                        .social a:hover .icon.google {
-                                            background: #e64c65;
-                                        }
-                            .social .icon {
-                                float: left;
-                                width: 60px;
-                                height: 60px;
-                                text-align: center;
-                                font-size: 20px;
-                                border-bottom-left-radius: 5px;
-                                border-top-left-radius: 5px;
-                            }
-                                .social .icon.facebook {
-                                    background: #1a4e95;						
-                                }
-                                .social .icon.twitter {
-                                    background: #35aadc;						
-                                }
-                                .social .icon.google {
-                                    background: #cc324b;						
-                                }
+  }
+}
+.newSkill a{
+    position: absolute;
+    right: 5px;
+    font-size: 20px;
+    cursor: pointer;
+    color: #1f253d;
+    &:hover {
+      color: #1b36a2;
+    }
+  }
+.newSkill input::placeholder {
+  color: #1f253d;
+}
+.middle-container {
+  margin: 0 25px;
+}
+
+.add-button .icon {
+  float: right;
+  line-height: 18px;
+  width: 23px;
+  border: 2px solid;
+  border-radius: 100%;
+  font-size: 18px;
+  text-align: center;
+  margin: 10px;
+}
+.add-button .icon:hover {
+  color: #e64c65;
+  border-color: #e64c65;
+}
+.user-name {
+  margin: 25px 0 16px;
+  text-align: center;
+}
+.profile-description {
+  width: 210px;
+  margin: 0 auto;
+  text-align: center;
+}
+.profile-options {
+  padding-top: 23px;
+}
+.profile-options li {
+  border-left: 1px solid #6a77aa;
+  width: 33.33%;
+  color: #143149;
+  text-align: center;
+  padding-top: 10px;
+}
+.profile-options a:hover {
+  text-decoration: none;
+  background: #50597b;
+}
+.profile-options img {
+  filter: invert(10%);
+  margin-top: 10px;
+}
+.profile-options .missions {
+  border-top: 4px solid #fcb150;
+}
+.profile-options .likes {
+  border-top: 4px solid #11a8ab;
+}
+.profile-options .dislikes {
+  border-top: 4px solid #e64c65;
+}
+
+/********************************************* RIGHT CONTAINER ****************************************/
+.right-container {
+}
+.join-newsletter {
+  padding: 5%;
+  text-align: center;
+}
+.social {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+.social li {
+  margin-left: 10px;
+}
+.social a {
+  line-height: 30px;
+}
+.social a:hover {
+  text-decoration: none;
+}
+.social .titular {
+  border-radius: 5px;
+  width: 200px;
+  margin: 10px;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.477);
+}
+.social .icon img {
+  margin: 10px;
+}
+.social .facebook {
+  background: #3468af;
+  -webkit-transition: background 0.3s;
+  transition: background 0.3s;
+}
+.social a:hover .facebook {
+  background: #1a4e95;
+}
+.social a:hover .icon.facebook {
+  background: #3468af;
+}
+.social .twitter {
+  background: #4fc4f6;
+  -webkit-transition: background 0.3s;
+  transition: background 0.3s;
+}
+.social a:hover .twitter {
+  background: #35aadc;
+}
+.social a:hover .icon.twitter {
+  background: #4fc4f6;
+}
+.social .gmail {
+  background: #2da25c;
+  -webkit-transition: background 0.3s;
+  transition: background 0.3s;
+}
+.social a:hover .gmail {
+  background: #29884f;
+}
+.social a:hover .icon.gmail {
+  background: #2da25c;
+}
+.social .instagram {
+  background: linear-gradient(rgb(236, 16, 163),rgb(111, 0, 255));
+  -webkit-transition: background 0.3s;
+  transition: background 0.3s;
+}
+.social a:hover .instagram {
+  background: linear-gradient(rgb(174, 11, 120),rgb(78, 7, 171));
+}
+.social a:hover .icon.instagram {
+  background: linear-gradient(rgb(236, 16, 163),rgb(111, 0, 255));
+}
+.social .youtube {
+    background: rgb(247, 67, 67);
+    -webkit-transition: background 0.3s;
+    transition: background 0.3s;
+  }
+  .social a:hover .youtube {
+    background: rgb(207, 48, 48);
+  }
+  .social a:hover .icon.youtube {
+    background: rgb(247, 67, 67);
+  }
+  .social .snapchat {
+    background: #ddc913;
+    -webkit-transition: background 0.3s;
+    transition: background 0.3s;
+  }
+  .social a:hover .snapchat {
+    background: #c8c031;
+  }
+  .social a:hover .icon.snapchat {
+    background: #ddc913;
+  }
+  .social .tiktok {
+    background: #12697a;
+    -webkit-transition: background 0.3s;
+    transition: background 0.3s;
+  }
+  .social a:hover .tiktok {
+    background: #0d515f;
+  }
+  .social a:hover .icon.tiktok {
+    background: #12697a;
+  }
+  .social .linkedin {
+    background: #4784d9;
+    -webkit-transition: background 0.3s;
+    transition: background 0.3s;
+  }
+  .social a:hover .linkedin {
+    background: #3565a8;
+  }
+  .social a:hover .icon.linkedin {
+    background: #4784d9;
+  }
+  .social .github {
+    background: rgb(50, 64, 100);
+    -webkit-transition: background 0.3s;
+    transition: background 0.3s;
+  }
+  .social a:hover .github {
+    background: rgb(33, 48, 85);
+  }
+  .social a:hover .icon.github {
+    background: rgb(50, 64, 100);
+  }
+  .social .pinterest {
+      background: rgb(207, 48, 48);
+      -webkit-transition: background 0.3s;
+      transition: background 0.3s;
+    }
+    .social a:hover .pinterest {
+      background: rgb(172, 47, 47);
+    }
+    .social a:hover .icon.pinterest {
+      background: rgb(207, 48, 48);
+    }
+    .social .gitlab {
+        background: rgb(242, 153, 69);
+        -webkit-transition: background 0.3s;
+        transition: background 0.3s;
+      }
+      .social a:hover .gitlab {
+        background: rgb(220, 143, 71);
+      }
+      .social a:hover .icon.gitlab {
+        background: rgb(242, 153, 69);
+      }
+      .social .default {
+        background: rgb(171, 171, 171);
+        -webkit-transition: background 0.3s;
+        transition: background 0.3s;
+      }
+      .social a:hover .default {
+        background: rgb(149, 149, 149);
+      }
+.social .icon {
+  float: left;
+  width: 60px;
+  height: 60px;
+  text-align: center;
+  font-size: 20px;
+  border-bottom-left-radius: 5px;
+  border-top-left-radius: 5px;
+}
+.social .icon.facebook {
+  background: #1a4e95;
+}
+.social .icon.twitter {
+  background: #35aadc;
+}
+.social .icon.gmail {
+  background: #29884f;
+}
+.social .icon.instagram {
+    background: linear-gradient(rgb(174, 11, 120),rgb(78, 7, 171));
+  }
+.social .icon.youtube {
+    background: rgb(207, 48, 48);
+  }
+.social .icon.snapchat {
+    background: #c8c031;
+}
+.social .icon.tiktok {
+    background: #06414d;
+  }
+  .social .icon.pinterest {
+    background: rgb(172, 47, 47);
+  }
+  .social .icon.linkedin {
+    background: #3565a8;
+  }
+    .social .icon.github {
+    background: rgb(33, 48, 85);
+  }
+  .social .icon.gitlab {
+    background: rgb(220, 143, 71);
+  }
+.add {
+  background-color: #41707a;
+  color: #a2c4cb;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 5px;
+  &:hover {
+    background-color: #2f575e;
+  }
+}
