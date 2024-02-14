@@ -25,13 +25,11 @@ export class SigninComponent implements OnInit{
       (response) => {
         console.log('Login successful:', response.access_token);
         this.authService.saveToken(response.access_token);
-        // Save token to local storage or use it as needed
-        this.router.navigate(['/profile']);
+        this.router.navigate(['/profile']).then(() => {location.reload();});
       },
       (error) => {
         this.alert = "Email ou mot de passe invalide !";
         console.error('Login failed:', error);
-        // Handle login error
       }
     );
     } else {

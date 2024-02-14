@@ -27,7 +27,6 @@ export class SignupStep1Component implements OnInit {
     if (!this.name || !this.email || !this.password1 || !this.password2)
       this.alert = "Tous les Champs doivent être remplis !";
     else if (!this.email.includes("@")) {
-      console.log("-2");
       this.alert = "Email non valide !";
     }
     else {
@@ -50,7 +49,7 @@ export class SignupStep1Component implements OnInit {
     }
   }
   userExistes(email: string) {
-    this.userService.readUser(email).subscribe(
+    this.userService.readUserByEmail(email).subscribe(
       (user: User) => {
         console.log(user);
         if(user)
