@@ -1,0 +1,44 @@
+<div class="filters">
+  <select name="type" [(ngModel)]="status" (ngModelChange)="filterStatus()">
+    <option value="" selected>Tous</option>
+    <option value="publié">Publiés</option>
+    <option value="proposé">Proposés</option>
+    <option value="terminé">Terminés</option>
+    <option value="refusé">Réfusés</option>
+  </select>
+    <div class="input-group custom-search-form">
+      <input type="text" class="form-control" placeholder="Search..." name="search" [(ngModel)]="searchValue"/>
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="button" (click)="search()">
+          <i [class]="icon"></i>
+        </button>
+      </span>
+    </div>
+  </div>
+  <table class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <th>#ID</th>
+        <th>Projet</th>
+        <th>ID Proposeur</th>
+        <th>Nom Proposeur</th>
+        <th>Compétences</th>
+        <th>Status</th>
+        <th>Date de proposition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let s of services;">
+        <td><a [routerLink]="['/projets/projet/',s.project.id]" [fragment]="s.id?.toString()">{{s.id}}</a></td>
+        <td><a [routerLink]="['/projets/projet/',s.project.id]">{{s.project.id}}</a></td>
+        <td><a [routerLink]="['/profile/',s.proposer.id]">{{s.proposer.id}}</a></td>
+        <td>{{s.proposer.name}}</td>
+        <td>{{s.skills}}</td>
+        <td>{{s.status}}</td>
+        <td>{{s.proposedAt | date: ' HH:mm, yyyy-MM-dd'}}</td>
+        <td class="actions">
+            <button class="remove" (click)="deleteService(s)"><i class="fa fa-remove"></i></button>
+          </td>
+      </tr>
+    </tbody>
+  </table>
