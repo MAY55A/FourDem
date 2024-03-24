@@ -1,0 +1,91 @@
+.main-container {
+    display: flex;
+
+}
+.side-container {
+    width: 60%;
+    min-width: 300px;
+    border: 1px solid rgb(67, 101, 223);
+    border-radius: 10px;
+    background-color: aliceblue;
+    text-align: center;
+    padding: 5px;
+    h2 {
+        padding: 10px 5px;
+        border-bottom: 1px solid black;
+    }
+    ul {
+        li {
+            background-color: rgb(255, 255, 255);
+            p {
+                padding: 3px 25px 3px 8px;
+                font-size: 80%;
+                text-align: justify;
+                a {
+                    display: inline;
+                }
+            }
+        }
+    }
+    .read {
+        bottom: 5px;
+        top: unset;
+    }
+}
+.cards {
+    text-align: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    color: white;
+    a {
+        color: white;
+    }
+}
+.card {
+    min-width: 350px;
+    max-height: 250px;
+    padding: 20px;
+    margin: 20px;
+    border-radius: 10px;
+    ul {
+        display: flex;
+        justify-content: space-evenly;
+        li {
+            width: 100px;
+            text-align: center;
+            font-size: 13px;
+            border: 1px solid white;
+            padding: 10px 5px;
+            border-radius: 10px;
+            background-color: rgba(116, 116, 116, 0.236);
+        }
+        img {
+            filter: invert();
+            width: 30px;
+            height: 30px;
+            margin-bottom: 10px;
+        }
+    }
+    .arrow {
+        margin-left: 20px;
+    }
+}
+.blue {
+    background-color: rgb(67, 101, 223);
+}
+.green {
+    background-color: rgb(67, 223, 88);
+}
+.orange {
+    background-color: rgb(223, 158, 67);
+}
+.yellow {
+    background-color: rgb(223, 218, 67);
+}
+.card-title {
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid white;
+    font-size: 15px;
+}

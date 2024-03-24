@@ -1,0 +1,81 @@
+<div class="main-container">
+<div class="cards">
+<div class="card blue">
+    <div class="card-body">
+      <h5 class="card-title">gestion des utilisateurs <i class="fa fa-group"></i><a routerLink="../comptes" class="arrow">></a>
+      </h5>
+      <ul>
+        <li><a>
+            <img src="../assets/icons/demandeur.png"><br>
+            demandeurs
+        </a></li>
+        <li><a>
+            <img src="../assets/icons/fournisseur.png"><br>
+            fournisseurs
+        </a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="card green">
+    <div class="card-body">
+      <h5 class="card-title">gestion des projets <i class="fa fa-folder-open"></i><a routerLink="../projets" class="arrow">></a></h5>
+      <ul>
+        <li><a>
+            <img src="../assets/icons/proposed.png"><br>
+            proposés
+        </a></li>
+        <li><a>
+            <img src="../assets/icons/published.png"><br>
+            publiés
+        </a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="card orange">
+    <div class="card-body">
+      <h5 class="card-title">gestion des services <i class="fa fa-briefcase"></i><a routerLink="../services" class="arrow">></a></h5>
+      <ul>
+        <li><a>
+            <img src="../assets/icons/agreement.png"><br>
+            acceptés
+        </a></li>
+        <li><a>
+            <img src="../assets/icons/restriction.png"><br>
+            refusés
+        </a></li>
+      </ul>    </div>
+  </div>
+  <div class="card yellow">
+    <div class="card-body">
+      <h5 class="card-title">gestion des catégories <i class="fa fa-tags"></i><a routerLink="../categories" class="arrow">></a></h5>
+      <ul>
+        <li><a>
+            <img src="../assets/icons/domains/IT.png"><br>
+            IT
+        </a></li>
+        <li><a>
+            <img src="../assets/icons/domains/Comptabilité.png"><br>
+            comptabilité
+        </a></li>
+        <li><a>
+            <img src="../assets/icons/domains/Influence.png"><br>
+            Influence
+        </a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="side-container">
+  <h2>Notifications</h2>
+  <ul>
+    <li class="Message" *ngFor="let n of notifications">
+        <div [ngClass]="notificationService.getClass(n.type!)">
+          <i [ngClass]="notificationService.getIcon(n.type!)"></i>
+        </div>
+        <p class="Message-body" [innerHTML]="n.content"></p>
+        <button *ngIf="n.seen" class="read seen"><i class="fa fa-check"></i></button>
+        <button *ngIf="!n.seen" class="read" (click)="markAsRead(n)"><i class="fa fa-check"></i></button>
+    </li>
+  </ul>
+</div>
+</div>
