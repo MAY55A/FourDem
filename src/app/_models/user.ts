@@ -1,3 +1,6 @@
+import { Project } from "./project";
+import { Service } from "./service";
+
 export class User {
     id?: number;
     name!: string;
@@ -10,4 +13,6 @@ export class User {
     contacts?: string;
     tel?: string;
     skills?: string = '';
+    projects?: Project[];
+    services?: Service[];
 }

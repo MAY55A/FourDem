@@ -1,10 +1,12 @@
+import { Project } from "./project";
+import { User } from "./user";
+
 export class Service {
     id?: number;
-    proposerName!: string;
-    proposerId!: number;
-    project!: number;
+    proposer!: User;
+    project!: Project;
     status?: string;
-    liked?: boolean;
+    liked?: boolean | null;
     proposedAt?: Date;
     description!: string;
     skills!: string;
