@@ -1,0 +1,48 @@
+<div class="filters">
+  <select name="type" [(ngModel)]="type" (ngModelChange)="filterType()">
+    <option value="" selected>Tous</option>
+    <option value="Demandeur">Demandeurs</option>
+    <option value="Fournisseur">Fournisseurs</option>
+  </select>
+  <select *ngIf="type == 'Fournisseur'" name="domain" [(ngModel)]="domain" (ngModelChange)="filterDomain()">
+    <option value="" selected>Tous</option>
+    <option value="It">IT</option>
+    <option value="comptabilité">Comptabilité</option>
+    <option value="influence">Influence</option>
+  </select>
+  <div class="input-group custom-search-form">
+    <input type="text" class="form-control" placeholder="Search..." name="search" [(ngModel)]="searchValue"/>
+    <span class="input-group-btn">
+      <button class="btn btn-default" type="button" (click)="search()">
+        <i [class]="icon"></i>
+      </button>
+    </span>
+  </div>
+</div>
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th>#Id</th>
+      <th>Nom</th>
+      <th>Email</th>
+      <th>Type</th>
+      <th>Domaine</th>
+      <th>Date de creation</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let u of users;">
+      <td><a [routerLink]="['/profile/',u.id]">{{u.id}}</a></td>
+      <td>{{u.name}}</td>
+      <td>{{u.email}}</td>
+      <td>{{u.type}}</td>
+      <td>{{u.domain}}</td>
+      <td>{{u.createdAt | date: ' HH:mm, yyyy-MM-dd'}}</td>
+      <td class="actions">
+        <button class="btn btn-danger" (click)="warnAccount(u.id!)"><i class="fa fa-warning"></i> avertir</button>
+        <button class="remove" (click)="deleteAccount(u.id!)"><i class="fa fa-remove"></i></button>
+      </td>
+    </tr>
+  </tbody>
+</table>
