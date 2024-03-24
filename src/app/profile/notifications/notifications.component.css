@@ -1,6 +1,6 @@
 
 .notifications {
-  padding: 5% 15%;
+  padding: 10px 15%;
   width: 100%;
 }
 
@@ -9,9 +9,10 @@
   position: relative;
   margin: 5px auto 0;
   width: 100%;
-  color: #fff;
+  color: #0a0a27;
+  border: 1px solid rgb(25, 82, 204);
   border-radius: 20px;
-  background-color: hsla(218, 45%, 76%, 0.9);
+  background-color: hsla(222, 70%, 90%, 0.874);
   transition: all 0.2s ease;
   
   &.is-hidden {
@@ -36,24 +37,32 @@
     >i {
       width: 20px;
       font-size: 20px;
+      color: #ffffffcd;
     }
   }
-  
-  .satisfaction {
-    background-color: rgba(207, 227, 92, 0.5);
+  .pink {
+    background-color: rgba(211, 74, 168, 0.644);
   }
-
-  .dissatisfaction {
-    background-color: rgba(173, 99, 39, 0.5);
+  .yellow {
+    background-color: rgba(235, 238, 35, 0.768);
   }
-
+  .grey {
+    background-color: rgba(152, 152, 152, 0.644);
+  }
+  .orange {
+    background-color: rgba(218, 117, 35, 0.745);
+  }
   .red {
-    background-color: rgba(176, 72, 72, 0.5);
-
+    background-color: rgba(198, 58, 58, 0.681);
   }
-
   .green {
     background-color: rgba(86, 176, 72, 0.5);
+  }
+  .golden {
+    background-color: rgba(227, 174, 50, 0.766);
+  }
+  .brown {
+    background-color: rgba(151, 81, 40, 0.681);
   }
   .Message-body {
     display: table-cell;
@@ -91,12 +100,12 @@
     }
   }
 
-  .Message-close {
+  .read {
     position: absolute;
-    color: #fff;
+    color: #87a674;
     border: none;
     outline: none;
-    font-size: 20px;
+    font-size: 16px;
     right: 5px;
     top: 5px;
     opacity: 0;
@@ -105,6 +114,16 @@
     .Message:hover & {
       opacity: 1;
     }
+    &:hover {
+      color: #51a895;
+    }
+    &.seen {
+      opacity: 1;
+      cursor: unset;
+      &:hover {
+          color: #87a674;
+      }
+  }
 
   }
 
