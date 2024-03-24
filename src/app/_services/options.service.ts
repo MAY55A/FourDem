@@ -5,12 +5,13 @@ import { Project } from "../_models/project";
 import { isEqual } from "lodash";
 import { ProjectService } from "./project.service";
 import { User } from "../_models/user";
+import { NotificationService } from "./notification.service";
 
 @Injectable({
     providedIn: 'root'
 })
 export class OptionsService {
-    constructor(private categoryService: CategoryService, private projectService: ProjectService) { }
+    constructor(private categoryService: CategoryService, private projectService: ProjectService, private notificationService: NotificationService) { }
     status!: string | null;
     displayStyle = "none";
     formType?: string;
@@ -20,14 +21,13 @@ export class OptionsService {
     checkedDomains = [false, false, false];
     categories: Category[] = [];
     checkedCategories!: boolean[];
-    selectedCategories: Set<string> = new Set();
+    selectedCategories: Set<Category> = new Set();
     project = new Project();
     unmodifiedProject?: Project;
 
 
     getCategories() {
         this.categories = [];
-        console.log(this.checkedDomains)
         this.checkedDomains.forEach((domain, i) => {
             if (domain) {
                 this.categoryService.getCategoriesByDomain(this.domains[i]).subscribe(
@@ -42,12 +42,15 @@ export class OptionsService {
 
     updateSelectedCategories() {
         this.selectedCategories = new Set();
+        console.log(this.checkedCategories)
         this.checkedCategories.forEach((checked, i) => {
             if (checked)
-                this.selectedCategories.add(this.categories[i].name)
+                this.selectedCategories.add(this.categories[i])
         })
     }
-
+    categoryIsIncluded(cat: Category) {
+        return this.project.categories?.map(c => c.id).includes(cat.id);
+    }
     openProjectForm() {
         this.formType = "Ajout";
         this.displayStyle = "block";
@@ -58,35 +61,35 @@ export class OptionsService {
         this.categories = [];
         this.checkedDomains = [false, false, false];
         this.success = '';
+        this.alert = '';
         this.displayStyle = "none";
     }
     checkFormFields() {
         this.alert = '';
         if (!this.project.title)
-            this.alert = "vous devez donner un titre à votre projet !";
+            this.alert = "Vous devez donner un titre à votre projet !";
         else if (!this.project.description)
-            this.alert = "vous devez introduire une description de votre projet !";
-        else if (this.project.description.length < 250)
-            this.alert = "la description doit contenir au moin 250 caractères !";
-        else if (!this.checkedDomains.includes(true) && !this.project.categories)
-            this.alert = "vous devez choisir au moin un domaine !";
-        else if (this.selectedCategories.size == 0 && !this.project.categories)
-            this.alert = "vous devez choisir au moin une catégorie !";
+            this.alert = "Vous devez introduire une description de votre projet !";
+        else if (this.project.description.length < 150)
+            this.alert = "La description doit contenir au moins 150 caractères !";
+        else if (!this.checkedDomains.includes(true) && this.project.categories.length == 0)
+            this.alert = "Vous devez choisir au moins un domaine !";
+        else if (this.selectedCategories.size == 0 && this.project.categories.length == 0)
+            this.alert = "Vous devez choisir au moins une catégorie !";
     }
 
     submitAddProjectForm(proposer: User) {
         this.checkFormFields();
         if (!this.alert) {
-            this.project.proposerId = proposer.id!;
-            this.project.proposerName = proposer.name;
-            this.project.categories = [...this.selectedCategories].join();
+            this.project.proposer = proposer;
+            this.project.categories = [...this.selectedCategories];
             this.projectService.createProject(this.project).subscribe(
                 (data) => {
                     console.log("creating ...");
                     this.success = 'Projet proposé !';
                     setTimeout(() => {
                         window.location.reload();
-                    }, 3000);
+                    }, 1000);
                 }
             );
         }
@@ -101,26 +104,29 @@ export class OptionsService {
         this.formType = "Modification";
     }
 
-    removeCategory(cat: string) {
-        this.project.categories = this.project.categories.split(",").filter(c => c != cat).join(",");
+    removeCategory(cat: Category) {
+        this.project.categories = this.project.categories.filter(c => c.id != cat.id);
     }
 
     submitEditProjectForm() {
         this.checkFormFields();
+        if (this.selectedCategories.size > 0) {
+            this.project.categories = this.project.categories.concat([...this.selectedCategories]);
+            console.log(this.selectedCategories)
+            console.log(this.project.categories)
+        }
+        console.log(this.project, this.unmodifiedProject)
         if (isEqual(this.project, this.unmodifiedProject))
-            this.alert = "aucune modification est affectée !";
+            this.alert = "Aucune modification est affectée !";
         if (!this.alert) {
-            if (this.selectedCategories.size > 0) {
-                var selectedCategories = [...this.selectedCategories].join();
-                this.project.categories = this.project.categories ? `${this.project.categories},${selectedCategories}` : selectedCategories;
-            }
-            this.projectService.updateProject(this.project).subscribe(
+
+            this.projectService.updateProjectAndNotify(this.project, "Modification").subscribe(
                 () => {
                     console.log("updating ...");
                     this.success = 'Projet modifié !';
                     setTimeout(() => {
                         window.location.reload();
-                    }, 3000);
+                    }, 1000);
                 }
             )
         }
@@ -128,19 +134,20 @@ export class OptionsService {
 
     finishProject(p: Project) {
         p.status = "terminé";
-        this.projectService.updateProject(p).subscribe(
+        this.projectService.updateProjectAndNotify(p, "Finishing").subscribe(
             () => {
-                console.log("updating ...");
+                console.log('Project successfully finished !');
                 setTimeout(() => {
-                    window.location.reload();
+                window.location.reload();
                 }, 3000);
-            }
-        )
+            },
+            (err) => console.log(err)
+        );
     }
 
-    deleteProject(id: number) {
+    deleteProject(p: Project) {
         if (confirm('Si vous supprimez ce projet, vous ne pouvez jamais le récupérer, vouler vous le supprimer ?')) {
-            this.projectService.deleteProject(id).subscribe(
+            this.projectService.deleteProjectAndNotify(p).subscribe(
                 () => {
                     console.log('Project deleted successfully');
                     window.location.reload();

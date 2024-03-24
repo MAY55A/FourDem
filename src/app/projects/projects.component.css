@@ -1,33 +1,105 @@
 .filters {
-    margin: 20px;
-    padding: 10px;
-    display: flex;
-    justify-content: space-between;
+  margin: 20px;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
 
-    input {
-        font-size: 14px;
-        width: 300px;
-        height: 35px;
-        color: #859098;
-        border-radius: 20px;
-        text-transform: capitalize;
-        font-weight: 500;
-        padding-left: 10px;
-        margin: 10px;
-    }
+  input {
+    font-size: 14px;
+    width: 300px;
+    height: 35px;
+    color: #859098;
+    border-radius: 20px;
+    text-transform: capitalize;
+    font-weight: 500;
+    padding-left: 10px;
+    margin: 10px;
+  }
 
-    select {
-        width: 90%;
-        border-radius: 10px;
-    }
+  select {
+    width: 90%;
+    border-radius: 10px;
+    border: 1px solid rgb(87, 100, 220);
+  }
 }
 
 .infos {
+  img {
+    width: 50px;
+    border-radius: 30px;
+    border: 1px solid rgb(87, 100, 220);
+  }
+  min-width: 50px;
+}
 
-    img {
-        width: 50px;
-        border-radius: 30px;
-        border: 1px solid gray;
+.sliderBox {
+  max-width: 100%;
+  position: relative;
+
+  .sliderWrap {
+    overflow: hidden;
+    margin: 0 3em;
+    text-align: center;
+
+    .sliderContent {
+      white-space: nowrap;
+      margin: 1em 0;
+      padding: 0;
+      transition: left 1s;
+      position: relative;
+      left: 0;
+      display: inline-block;
+
+
+      li {
+        img {
+          width: 8em;
+          height: 8em;
+          margin: 1em;
+        }
+        display: inline-block;
+        text-align: center;
+        text-wrap: wrap;
+        width: 20em;
+        height: 15em;
+        border: 1px dotted #40537e;
+        border-radius: 20px;
+        margin: 10px;
+        cursor: pointer;
+      }
     }
-    min-width: 50px;
+  }
+
+  button {
+    border: none;
+    background: none;
+    font-size: 2em;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    color: #bababa;
+
+    &:hover {
+      color: #747474;
+    }
+
+    &.right {
+      left: auto;
+      right: 0;
+    }
+  }
+}
+
+.category.active,
+.category:hover, .category.clicked {
+  background: rgba(22, 132, 144, 0.3);
+
+  img {
+    filter: invert(100%);
+  }
+
+  h5 {
+    color: white;
+  }
 }

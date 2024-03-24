@@ -1,5 +1,5 @@
 .project-page {
-  padding: 50px;
+  padding: 10px 30px;
 }
 h5 {
   margin-top: 20px;
@@ -13,17 +13,22 @@ h5 {
 }
 .header span {
   color: #636f99;
-  text-decoration: none;
-  font-size: 30px;
+  font-size: 25px;
   cursor: pointer;
+  margin: -10px -20px;
   &:hover {
-    color: brown;
+    color: rgb(57, 182, 186);
+    transition: cubic-bezier(0.075, 0.82, 0.165, 1);
   }
 }
+.goback {
+  letter-spacing: -5px;
+}
 .project.single {
-  background-color: rgba(214, 221, 239, 0.8);
+  background-color: hsla(0, 0%, 100%, 0.692);;
   flex-direction: column;
   padding: 2%;
+  margin: 0;
 }
 .info {
     p {
@@ -33,11 +38,12 @@ h5 {
 .project .owner {
     position: absolute;
     text-align: center;
-    right: 80px;
+    right: 50px;
   img {
     width: 50px;
     height: 50px;
     border-radius: 30px;
+    border: 2px solid #30374f;
   }
   p {
     position: relative;
@@ -66,19 +72,44 @@ h5 {
   top: 5px;
   right: 10px;
   font-size: 18px;
+  opacity: 0.5;
+  cursor: pointer;
 
-  &.choose {
-    color: rgba(49, 139, 16, 0.7);
+  &.accept {
+    color: rgb(49, 139, 16);
     right: 30px;
+    &.chosen {
+      right: 10px;
+    }
   }
 
-  &.remove {
-    color: rgba(139, 16, 37, 0.7);
+  &.refuse {
+    color: rgb(139, 16, 37);
+  }
+
+  &.chosen, &:hover {
+    opacity: 1;
+    display: inline;
+  }
+}
+.eval {
+  position: absolute;
+  right: 20px;
+  bottom: 10px;
+  cursor: pointer;
+  &.like {
+    right: 40px;
+  }
+  &:hover {
+    font-size: 18px;
+  }
+  &.chosen {
+    font-size: 18px;
   }
 }
 .add {
   display: inline;
-  color: aliceblue;
+  color: rgb(11, 29, 45);
   font-size: 20px;
 }
 .proposition:hover .action {
@@ -90,13 +121,19 @@ h5 {
 }
 .proposition {
   position: relative;
-  background-color: hsla(218, 45%, 76%, 0.9);
+  background-color:  rgba(214, 221, 239, 0.8);
   border-radius: 15px;
+  border: 2px solid #747887;
   padding: 2%;
   margin-top: 2%;
 }
 .proposer {
+  width: 300px;
   margin-bottom: 5px;
+  padding: 0 0 5px 10px;
+  border-bottom: 1px solid #c5c5db;
+  border-left: 1px solid #c5c5db;
+  border-radius: 10px;
   a {
     display: inline;
   }
@@ -105,6 +142,7 @@ h5 {
     height: 50px;
     width: 50px;
     border-radius: 30px;
+    border: 2px solid #747887;
   }
 }
 .user-info {
@@ -126,10 +164,10 @@ h5 {
 }
 
 textarea {
-  background-color: hsla(218, 48%, 82%, 0.9);
+  background-color: hsl(211deg 100% 97.8% / 40%);
   border: none;
   border-radius: 10px;
-  padding: 5px;
+  padding: 5px 10px;
   width: 100%;
   height: 100px;
 }

@@ -5,14 +5,25 @@
       <option *ngFor="let d of domains" [value]="d">{{d}}</option>
     </select>
   </div>
+  <!--
   <div>
     <label>catégorie :</label>&nbsp;&nbsp;
     <select [disabled]="domain=='Tous'" [(ngModel)]="category" (change)="getProjects()">
-      <option>Tous</option>
-      <option *ngFor="let c of categories" [value]="c.name">{{c.name}}</option>
+      <option value="">Tous</option>
+      <option *ngFor="let c of categories" [ngValue]="c">{{c.name}}</option>
     </select>
   </div>
+-->
   <input type="text" placeholder="chercher un projet ..." [(ngModel)]="searchValue" (ngModelChange)="search()"/>
+</div>
+<div class="sliderBox categories">
+  <button *ngIf="domain != 'Tous'" type="button" class="left fa fa-chevron-left" onclick="slide({left: 0})"></button>
+  <div class="sliderWrap">
+    <ul class="sliderContent">
+      <li *ngFor="let c of categories;" [ngClass]="{'category': true, 'clicked': category?.id == c.id}" (click)="pickCategory(c)"><img [src]="'../assets/icons/categories/'+c.id+'.png'"><h5>{{c.name}}</h5></li>
+  </ul>
+  </div>
+  <button *ngIf="domain != 'Tous'" type="button" class="right fa fa-chevron-right" onclick="slide({left: 1})"></button>
 </div>
 <div class="empty" *ngIf="projects.length == 0">Aucun Projet</div>
 <div class="projects">
@@ -24,11 +35,11 @@
     <div>
         <p class="description">{{p.description.substr(0,200)}}<a [routerLink]="['projet/',p.id]">...</a></p>
         <ul class="services">
-          <li *ngFor="let c of p.categories.split(',')" class="service">{{c}}</li>
+          <li *ngFor="let c of p.categories" class="service">{{c.name}}</li>
       </ul>
     </div>
-    <a class="infos" [routerLink]="['/profile/',p.proposerId]">
-        <img [src]='["../../assets/images/users/" + p.proposerId+ ".jpg"]' onerror="this.src='../../assets/icons/defaultuser.png'" [title]="p.proposerName">
+    <a class="infos" [routerLink]="['/profile/',p.proposer.id]">
+        <img [src]='["../../assets/images/users/" + p.proposer.id+ ".jpg"]' onerror="this.src='../../assets/icons/defaultuser.png'" [title]="p.proposer.name">
     </a>
   </div>
 </div>

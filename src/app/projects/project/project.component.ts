@@ -8,6 +8,7 @@ import { UserService } from 'src/app/_services/user.service';
 import { AppComponent } from 'src/app/app.component';
 import { Location } from '@angular/common';
 import { OptionsService } from 'src/app/_services/options.service';
+import { User } from 'src/app/_models/user';
 
 @Component({
   selector: 'app-project',
@@ -19,27 +20,38 @@ export class ProjectComponent implements OnInit{
   project!: Project;
   service = new Service();
   proposedServices?: Service[];
-  user = this.app.user;
+  user?: User;
   skills?: string[] = [];
   checkedSkills?: boolean[] = [true];
   selectedSkills: Set<string> = new Set();
   newSkill?: string;
-  constructor(private projectService: ProjectService, private route: ActivatedRoute, private app: AppComponent, public options: OptionsService, private userService: UserService, private serviceService: ServiceService, private location: Location) {}
+  constructor(private projectService: ProjectService, private route: ActivatedRoute, public options: OptionsService, private userService: UserService, private serviceService: ServiceService, private location: Location) {}
 
   ngOnInit(): void {
     var id = Number(this.route.snapshot.paramMap.get("id"));
     this.getProject(id);
-    this.getPropositions(id)
-    if(this.user?.skills) {
-      this.skills = this.user.skills.split(' ');
-      this.checkedSkills = new Array(this.skills?.length).fill(false);
-    }
+    this.getProfile();
+  }
+
+
+  getProfile() {
+    this.userService.getProfile()?.subscribe(
+      (data) => {
+        this.user = data;
+        if(this.user?.skills) {
+          this.skills = this.user.skills.split(' ');
+          this.checkedSkills = new Array(this.skills?.length).fill(false);
+        }
+      }
+    );
   }
 
   getProject(id: number) {
     this.projectService.getProject(id).subscribe(
       (p) => {
         this.project = p;
+        console.log(this.project);
+        this.getPropositions(id);
       }
     )
   }
@@ -63,15 +75,11 @@ export class ProjectComponent implements OnInit{
   addSkill() {
     if(this.newSkill) {
         this.newSkill = this.newSkill.replace(/ /g, '-');
-        console.log(this.newSkill);
       if( !this.skills?.includes(this.newSkill)) {
-        console.log(this.user?.skills)
         this.user!.skills = (this.user!.skills + ' ' + this.newSkill.replace(/ /g, ',')).trim();
         this.skills?.push(this.newSkill);
         this.checkedSkills?.push(true);
         this.selectedSkills?.add(this.newSkill);
-        console.log(this.checkedSkills)
-        console.log(this.selectedSkills)
         this.newSkill = '';
         this.userService.updateUser(this.user!).subscribe(
           () => {
@@ -87,9 +95,8 @@ export class ProjectComponent implements OnInit{
   }
 
   proposeService() {
-    this.service.proposerId = this.user!.id!;
-    this.service.proposerName = this.user!.name;
-    this.service.project = this.project.id!;
+    this.service.proposer = this.user!;
+    this.service.project = this.project;
     this.service.skills = [...this.selectedSkills].join(' ');
     this.serviceService.createService(this.service).subscribe(
       () => {
@@ -100,8 +107,39 @@ export class ProjectComponent implements OnInit{
     )
   }
 
+  updateServiceEvaluation(s: Service, type: string) {
+    var notifType: string;
+    if(type == "Liking")
+      s.liked = true;
+    else if(type == "Disliking")
+      s.liked = false;
+    else
+      s.liked = null;
+    this.serviceService.updateServiceEvaluationAndNotify(s, type).subscribe(
+      () => {
+          console.log('Service evaluation successfully updated !');
+        },
+        (err) => console.log(err)
+      );
+  }
+
+  updateServiceStatus(s: Service, type: string) {
+    var notifType: string;
+    if(type == "Acceptation")
+      s.status = "accepté";
+    else if(type == "Rejection")
+      s.status = "refusé";
+    else
+      s.status = "proposé";
+    this.serviceService.updateServiceAndNotify(s, type).subscribe(
+      () => {
+          console.log('Service status successfully updated !');
+        },
+        (err) => console.log(err)
+      );
+  }
+
   replace(s: string): string {
-    console.log(s.replace(/-/g, ' '));
     return s.replace(/-/g, ' ');
   }
 

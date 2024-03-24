@@ -1,39 +1,39 @@
 
     <div class="project-page">
         <div class="header">
-            <a (click)="goBack()"><span class="goback"><</span></a>
-            <div class="options" *ngIf="user?.id! == project.proposerId">
+            <a (click)="goBack()"><span class="goback"><<</span></a>
+            <div class="options" *ngIf="user?.id! == project?.proposer?.id">
                 <a data-toggle="collapse" href="#options"><span>...</span></a>
                 <ul id="options" class="panel-collapse collapse">
-                    <li *ngIf="project.status=='publié'"><button (click)="options.finishProject(project)"><i class="fa fa-check"></i> marquer comme terminé</button></li>
+                    <li *ngIf="project?.status=='publié'"><button (click)="options.finishProject(project)"><i class="fa fa-check"></i> marquer comme terminé</button></li>
                     <li><button (click)="options.editProject(project)"><i class="fa fa-pencil"></i> modifier</button></li>
-                    <li><button (click)="options.deleteProject(project.id!)"><i class="fa fa-trash"></i> supprimer</button></li>
+                    <li><button (click)="options.deleteProject(project)"><i class="fa fa-trash"></i> supprimer</button></li>
                 </ul>
             </div>
         </div>
         <div class="single project">
             <div class="project-header">
-                <a  *ngIf="user?.id! != project.proposerId" class="owner" [routerLink]="['/profile/',project.proposerId]">
-                    <img [src]='["../../../assets/images/users/" + project.proposerId + ".jpg"]' onerror="this.src='../../../assets/icons/defaultuser.png'">
-                    <p>{{project.proposerName}}</p>
+                <a class="owner" [routerLink]="['/profile/',project.proposer.id]">
+                    <img [src]='["../../../assets/images/users/" + project.proposer.id + ".jpg"]' onerror="this.src='../../../assets/icons/defaultuser.png'">
+                    <p *ngIf="user?.id! != project?.proposer?.id">{{project.proposer.name}}</p>
                 </a>
                 <h3 class="title">{{project.title}}</h3>
-                <p *ngIf="project.status=='proposé' || project.status=='refusé'">proposé {{ project.proposedAt | date: 'à HH:mm, le yyyy/MM/dd' }}</p>
-                <p *ngIf="project.status=='publié' || project.status=='terminé'">publié {{ project.publishedAt | date: 'à HH:mm, le yyyy/MM/dd' }}</p>
-                <p *ngIf="project.status=='terminé'">terminé le {{ project.finishedAt | date: 'à HH:mm, le yyyy/MM/dd' }}</p>
+                <p *ngIf="project?.status=='proposé' || project?.status=='refusé'">proposé {{ project.proposedAt | date: 'à HH:mm, le yyyy/MM/dd' }}</p>
+                <p *ngIf="project?.status=='publié' || project?.status=='terminé'">publié {{ project.publishedAt | date: 'à HH:mm, le yyyy/MM/dd' }}</p>
+                <p *ngIf="project?.status=='terminé'">terminé le {{ project.finishedAt | date: 'à HH:mm, le yyyy/MM/dd' }}</p>
             </div>
             <div>
                 <p class="description">{{project.description}}</p>
                 <h5>catégories :</h5>
                 <ul class="services">
-                    <li *ngFor="let c of project.categories.split(',')" class="service">{{c}}</li>
+                    <li *ngFor="let c of project?.categories" class="service">{{c.name}}</li>
                 </ul>
             </div>
-            <div *ngIf="project.status=='publié' || project.status=='terminé'" class="infos">
-                <p>{{proposedServices!.length}} propositions</p>
+            <div *ngIf="project?.status=='publié' || project?.status=='terminé'" class="infos">
+                <p>{{proposedServices?.length}} propositions</p>
             </div>
         </div>
-        <div class="propositions" *ngIf="project.status=='publié' || project.status=='terminé'">
+        <div class="propositions" *ngIf="project?.status=='publié' || project?.status=='terminé'">
             <div *ngIf="user && user.type=='Fournisseur'" class="proposition">
                 <div class="proposer">
                     <img [src]='["../../../assets/images/users/" + user.id + ".jpg"]' onerror="this.src='../../../assets/icons/defaultuser.png'">
@@ -45,7 +45,7 @@
                 <a data-toggle="collapse" href="#comment"><span class="add action">+</span></a>
                 <div id="comment" class="comment panel-collapse collapse">
                     <textarea placeholder="mon service..." [(ngModel)]="service.description"></textarea>
-                    <h5>mes compétances :</h5>
+                    <h5>mes compétences :</h5>
                     <div class="checkbox-button-group">
                         <div *ngFor="let s of skills;let i=index;" class="checkbox-button skill">
                             <input type="checkbox" [(ngModel)]="checkedSkills![i]" (ngModelChange)="updateSelectedSkills()" name="skill">
@@ -59,23 +59,42 @@
                     <button class="btn btn-primary submit" [disabled]="disable()" (click)="proposeService()">proposer</button>
                 </div>
             </div>
-            <div class="proposition" *ngFor="let p of proposedServices;">
+            <div class="proposition" *ngFor="let p of proposedServices;" [id]="p.id">
                 <div class="proposer" >
-                    <a [routerLink]="['/profile/',p.proposerId]"><img [src]='["../../../assets/images/users/" + p.proposerId + ".jpg"]' onerror="this.src='../../../assets/icons/defaultuser.png'" width="50px"></a>
+                    <a [routerLink]="['/profile/',p.proposer.id]"><img [src]='["../../../assets/images/users/" + p.proposer.id + ".jpg"]' onerror="this.src='../../../assets/icons/defaultuser.png'" width="50px"></a>
                     <div class="user-info">
-                        <h4>{{p.proposerName}}</h4>
+                        <h4>{{p.proposer.name}}</h4>
                         <p>{{p.proposedAt | date: 'à HH:mm, le yyyy/MM/dd' }}</p>
                     </div>
                 </div>
                 <div class="comment">
                     <p>{{p.description}}</p>
-                    <h5>Compétances :</h5>
+                    <h5>Compétences :</h5>
                     <ul class="proposed services">
                         <li class="service" *ngFor="let s of p.skills.split(' ')">{{replace(s)}}</li>
                     </ul>
                 </div>
-                <a class="action choose" *ngIf="user?.id! == project.proposerId"><i class="fa fa-check"></i></a>
-                <a class="action remove" *ngIf="user?.id! == project.proposerId"><i class="fa fa-remove"></i></a>
+                <div *ngIf="user?.id! != project.proposer.id; else elseBlock">
+                    <a class="action accept chosen" *ngIf="p.status == 'accepté'"><i class="fa fa-check"></i></a>
+                    <a class="action refuse chosen" *ngIf="p.status == 'refusé'"><i class="fa fa-remove"></i></a>
+                    <a class="eval liked chosen" *ngIf="p.liked"><i class="fa fa-thumbs-up"></i></a>
+                    <a class="eval disliked chosen" *ngIf="p.liked === false"><i class="fa fa-thumbs-down"></i></a>
+                </div>
+                <ng-template #elseBlock>
+                    <div *ngIf="p.liked == null">
+                        <a class="action accept chosen" *ngIf="p.status == 'accepté'" (click)="updateServiceStatus(p, 'Canceling')"><i class="fa fa-check"></i></a>
+                        <a class="action accept" *ngIf="p.status == 'proposé'" (click)="updateServiceStatus(p, 'Acceptation')"><i class="fa fa-check"></i></a>
+                        <a class="action refuse chosen" *ngIf="p.status == 'refusé'" (click)="updateServiceStatus(p, 'Canceling')"><i class="fa fa-remove"></i></a>
+                        <a class="action refuse" *ngIf="p.status == 'proposé'" (click)="updateServiceStatus(p, 'Rejection')"><i class="fa fa-remove"></i></a>
+                    </div>
+                    <div *ngIf="p.status == 'accepté'">
+                        <a class="action accept chosen" *ngIf="p.liked != null"><i class="fa fa-check"></i></a>
+                        <a class="eval like chosen" *ngIf="p.liked" (click)="updateServiceEvaluation(p, 'EvaluationCanceling')"><i class="fa fa-thumbs-up"></i></a>
+                        <a class="eval like" *ngIf="!p.liked" (click)="updateServiceEvaluation(p, 'Liking')"><i class="fa fa-thumbs-o-up"></i></a>
+                        <a class="eval dislike chosen" *ngIf="p.liked === false" (click)="updateServiceEvaluation(p, 'EvaluationCanceling')"><i class="fa fa-thumbs-down"></i></a>
+                        <a class="eval dislike" *ngIf="p.liked !== false" (click)="updateServiceEvaluation(p, 'Disliking')"><i class="fa fa-thumbs-o-down"></i></a>
+                    </div>
+                </ng-template>
             </div>
         </div>
     </div>
@@ -88,6 +107,7 @@
                         <h2 class="card-header">Modification du projet</h2><br>
                             <div class="card-body">
                                 <form (ngSubmit)="options.submitEditProjectForm()">
+                                    <div class="scrollable">
                                     <div class="form-group">
                                         <label for="titre">Titre:</label>
                                         <input name="titre" required class="form-control" [(ngModel)]="options.project.title">
@@ -99,14 +119,14 @@
                                     <label>Catégories:</label>
                                     <div class="form-group checkbox-button-group">
                                         <div *ngFor="let c of options.categories;let i=index;" class="checkbox-button cat">
-                                            <div *ngIf="!project.categories?.includes(c.name)">
+                                            <div *ngIf="!project.categories?.includes(c)">
                                                 <input type="checkbox" [(ngModel)]="options.checkedCategories[i]" (ngModelChange)="options.updateSelectedCategories()" name="category">
                                                 <label>{{c.name}}</label>
                                             </div>
                                         </div>
-                                        <div *ngFor="let c of (options.project?.categories ? options.project?.categories?.split(',') : []);let i=index;" class="checkbox-button cat" (change)="options.removeCategory(c)">
+                                        <div *ngFor="let c of options.project?.categories;let i=index;" class="checkbox-button cat" (change)="options.removeCategory(c)">
                                             <input type="checkbox" checked name="category">
-                                            <label>{{c}}</label>
+                                            <label>{{c.name}}</label>
                                         </div>
                                         <div class="checkbox-button cat">
                                             <label><button data-toggle="collapse" href="#addcategories" class="addcat">+</button></label>
@@ -118,6 +138,7 @@
                                             </div>
                                         </div>
                                     </div>
+                                </div>
                                     <div class="alert alert-danger" role="alert" *ngIf ="options.alert">
                                         <strong>Échec !</strong> {{options.alert}}
                                     </div>
