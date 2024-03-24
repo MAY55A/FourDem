@@ -1,0 +1,79 @@
+<div class="filters">
+    <select name="domain" [(ngModel)]="domain" (ngModelChange)="filter()">
+        <option value="" selected>Tous</option>
+        <option value="It">IT</option>
+        <option value="Comptabilité">Comptabilité</option>
+        <option value="Influence">Influence</option>
+      </select>
+    <div class="input-group custom-search-form">
+      <input type="text" class="form-control" placeholder="Search..." name="search" [(ngModel)]="searchValue"/>
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="button" (click)="search()">
+          <i [class]="icon"></i>
+        </button>
+      </span>
+    </div>
+  </div>
+  <button class="btn btn-default add" (click)="addCategory()">+ ajouter</button>
+  <table class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <th>#Id</th>
+        <th>Nom</th>
+        <th>Description</th>
+        <th>Domaine</th>
+        <th>Date d'ajout</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let c of categories;">
+        <td>{{c.id}}</td>
+        <td>{{c.name}}</td>
+        <td>{{c.description}}</td>
+        <td>{{c.domain.toUpperCase()}}</td>
+        <td>{{c.addedAt | date: ' HH:mm, yyyy-MM-dd'}}</td>
+        <td class="actions">
+            <button class="btn btn-info" (click)="editCategory(c)"><i class="fa fa-edit"></i> modifier</button>
+            <button class="remove" (click)="deleteCategory(c)"><i class="fa fa-remove"></i></button>
+          </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':displayStyle}">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="card">
+                    <h2 class="card-header">{{formType}} d'une catégorie</h2><br>
+                        <div class="card-body">
+                            <form (ngSubmit)="formType=='Ajout'? submitAddForm() : submitEditForm();">
+                                <div class="form-group">
+                                    <label for="nom">Nom:</label>
+                                    <input name="nom" required class="form-control" [(ngModel)]="category.name">
+                                </div>
+                                <div class="form-group">
+                                    <label for="desc">Description :</label>
+                                    <textarea rows="15" name="desc" required class="form-control" [(ngModel)]="category.description"></textarea>
+                                </div>
+                                <label>Domaine:</label>
+                                <div class="form-group checkbox-button-group">
+                                    <input type="radio" name="domaine" [(ngModel)]="category.domain" value="It"> IT<br>
+                                    <input type="radio" name="domaine" [(ngModel)]="category.domain" value="comptabilité"> Comptabilité<br>
+                                    <input type="radio" name="domaine" [(ngModel)]="category.domain" value="influence"> Influence<br>
+                                </div>
+                                <div class="alert alert-danger" role="alert" *ngIf ="alert">
+                                    <strong>Échec !</strong> {{alert}}
+                                </div>
+                                <div class="alert alert-success" role="alert" *ngIf ="success">
+                                    <strong>Succès !</strong> {{success}}
+                                </div>
+                                <button *ngIf="formType=='Ajout'" type="submit" class="btn btn-primary">ajouter</button>
+                                <button *ngIf="formType=='Modification'" type="submit" class="btn btn-primary">modifier</button>
+                                <button type="button" (click)="closeForm()" class="btn btn-default">annuler</button>
+                            </form>
+                        </div>
+                </div>
+            </div>
+        </div>
+
