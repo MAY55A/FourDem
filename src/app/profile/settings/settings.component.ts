@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { SHA256, enc } from 'crypto-js';
 import { User } from 'src/app/_models/user';
+import { ProfileService } from 'src/app/_services/profile.service';
 import { UserService } from 'src/app/_services/user.service';
-import { AppComponent } from 'src/app/app.component';
 
 @Component({
   selector: 'app-settings',
@@ -11,16 +11,9 @@ import { AppComponent } from 'src/app/app.component';
   styleUrls: ['./settings.component.css']
 })
 export class SettingsComponent implements OnInit{
-  constructor(private app: AppComponent, private userService: UserService, private router: Router) { }
-  user = {
-    id: this.app.user!.id,
-    name: this.app.user!.name,
-    email: this.app.user!.email,
-    description: this.app.user!.description,
-    hash: this.app.user!.hash,
-    contacts: this.app.user!.contacts,
-    tel: this.app.user!.tel
-  };
+  constructor(private userService: UserService, private router: Router, private profileService: ProfileService) { }
+  currentUser!: User;
+  user!: User;
   alert?: string;
   success?: string;
   password1 = "";
@@ -29,14 +22,18 @@ export class SettingsComponent implements OnInit{
   contact = "";
 
   ngOnInit(): void {
-    console.log(this.app.user)
-    this.contacts = this.user.contacts ? this.user.contacts.split(' ') : [];
-    console.log(this.contacts)
+    this.profileService.user$.subscribe((user) => {
+      this.currentUser = user!;
+      this.user = {...this.currentUser};
+      this.contacts = this.user.contacts ? this.user.contacts.split(' ') : [];
+      this.getHash(this.user.email!);
+    });
+
   }
 
   deleteAccount() {
     if (confirm('Ce compte sera perdu infinitivement, vouler vous le supprimer ?')) {
-      this.userService.deleteUser(this.app.user!.id!).subscribe(
+      this.userService.deleteUser(this.user!.id!).subscribe(
         () => {
           console.log('User deleted successfully');
           this.router.navigate(["/compte/connexion"]).then(() => { location.reload(); })
@@ -48,12 +45,12 @@ export class SettingsComponent implements OnInit{
 
   update() {
     this.alert = "";
-    if (this.user.name != this.app.user?.name || this.user.email != this.app.user?.email || this.user.description != this.app.user?.description || this.user.tel != this.app.user.tel || this.contacts?.join(' ') != this.app.user.contacts || this.password1 || this.contact){
+    if (this.user.name != this.currentUser.name || this.user.email != this.currentUser.email || this.user.description != this.currentUser.description || this.user.tel != this.currentUser.tel || this.contacts?.join(' ') != this.currentUser.contacts || this.password1 || this.contact){
       if (!this.user.name || !this.user.email)
         this.alert = "Vous devez donner un nom et un email à votre profile !";
       else if (!this.user.email.includes("@") || this.user.email.includes(' '))
         this.alert = "Email non valide !";
-      else if (this.user.email != this.app.user?.email)
+      else if (this.user.email != this.currentUser.email)
         this.userExistes(this.user.email);
       if (!this.alert && this.password1){
           if (this.password1.length < 8)
@@ -80,12 +77,14 @@ export class SettingsComponent implements OnInit{
     } else
       this.alert = "Aucune modification !";
     if(!this.alert) {
-      this.user.contacts = this.contacts?.join(' ').trim();
+      this.user.contacts = this.contacts?.filter(c => c != "").join(' ').trim();
       this.userService.updateUser(this.user).subscribe(
         () => {
           console.log("updating account...");
           this.success = "Compte modifié !";
-          window.location.reload();
+          setTimeout(() => {
+            window.location.reload();
+          }, 1000);
         }
       )
     }
@@ -95,6 +94,17 @@ export class SettingsComponent implements OnInit{
       (user: User) => {
         if (user)
           this.alert = "Email déjà utilisé !";
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+
+  getHash(email: string) {
+    this.userService.getHash(email).subscribe(
+      (user: User) => {
+        this.user.hash = user.hash;
       },
       (error) => {
         console.log(error);
