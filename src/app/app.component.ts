@@ -19,7 +19,7 @@ export class AppComponent implements OnInit{
   }
 
   getProfile() {
-    this.userService.getProfile().subscribe(
+    this.userService.getProfile()?.subscribe(
       (data: User) => {
         this.user = data;
       }

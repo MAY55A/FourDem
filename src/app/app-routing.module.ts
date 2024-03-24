@@ -2,12 +2,10 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { ServicesComponent } from './services/services.component';
-import { ProjectsComponent } from './projects/projects.component';
 
 const routes: Routes = [
   {path:'', redirectTo: 'accueil', pathMatch: 'full'},
   {path: 'accueil', component: HomeComponent},
-
   {path: 'services',component: ServicesComponent},
   {path: 'services/:domaine', component: ServicesComponent},
   {
@@ -21,6 +19,10 @@ const routes: Routes = [
   {
     path: 'projets',
     loadChildren: ()=>import("./projects/projects.module").then((p)=>p.ProjectsModule)
+  },
+  {
+    path: 'admin',
+    loadChildren: ()=>import("./admin/admin.module").then((p)=>p.AdminModule)
   }
 ];
 

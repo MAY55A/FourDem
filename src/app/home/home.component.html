@@ -29,31 +29,13 @@
   <div class="container">
     <div class="list-topics-content">
       <ul>
-        <li>
+        <li *ngFor="let d of domains | keyvalue;">
           <div class="single-list-topics-content">
             <div class="single-list-topics-icon">
-              <img src="assets/icons/it.png" width="50px" />
+              <img [src]="'assets/icons/domains/' + d.key + '.png'" width="50px" />
             </div>
-            <h2><a routerLink="/services/it">IT</a></h2>
-            <p>150 services</p>
-          </div>
-        </li>
-        <li>
-          <div class="single-list-topics-content">
-            <div class="single-list-topics-icon">
-              <img src="assets/icons/comptabilité.png" width="50px" />
-            </div>
-            <h2><a routerLink="/services/comptabilité">comptabilité</a></h2>
-            <p>214 services</p>
-          </div>
-        </li>
-        <li>
-          <div class="single-list-topics-content">
-            <div class="single-list-topics-icon">
-              <img src="assets/icons/influence.png" width="50px" />
-            </div>
-            <h2><a routerLink="/services/influence">influence</a></h2>
-            <p>185 services</p>
+            <h2><a [routerLink]="['/services', d.key]">{{d.key}}</a></h2>
+            <p>{{d.value}} services</p>
           </div>
         </li>
       </ul>

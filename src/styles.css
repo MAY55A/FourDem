@@ -392,7 +392,7 @@ nav.navbar.bootsnav .navbar-toggle i {
 
 .single-list-topics-content:hover {
   color: #fff;
-  background: #607dd4;
+  background: #7dbcba;
   box-shadow: 0 5px 10px rgba(71, 71, 71, 0.4);
 }
 
@@ -426,7 +426,7 @@ nav.navbar.bootsnav .navbar-toggle i {
 
 .single-how-works-icon {
   display: inline-block;
-  color: #607dd4;
+  color: #7dbcba;
   width: 80px;
   height: 80px;
   line-height: 80px;
@@ -474,12 +474,12 @@ nav.navbar.bootsnav .navbar-toggle i {
 
 .single-how-works .welcome-hero-btn.how-work-btn {
   background: #fff;
-  color: #607dd4;
+  color: #7dbcba;
 }
 
 .single-how-works {
   box-shadow: 0 0px 10px rgba(71, 71, 71, 0.4);
-  background: #607dd4;
+  background-image: linear-gradient(#8e9fd1,#72b9c7);
   height: 350px;
 }
 

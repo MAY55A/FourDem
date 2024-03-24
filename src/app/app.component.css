@@ -1,17 +1,17 @@
 .section {
-
+    min-height: 800px;
 }
 .profile {
     position: fixed;
     top: 10px;
-    right: 15px;
+    right: 25px;
     z-index: 10;
     text-align: center;
     margin-left: 150px;
 
     img {
-        width: 35px;
-        height: 35px;
+        width: 40px;
+        height: 40px;
         border-radius: 20px;
         border: 2px solid gray;
         margin-bottom: 2px;
@@ -27,8 +27,9 @@
         width: 150px;
         position: relative;
         padding: 2px;
-        background: rgba(30, 41, 75, 0.9);
+        background: rgba(178, 188, 217, 0.9);
         border-radius: 15px;
+        transition: ease-in-out 0.2s;
 
         li {
             margin-top: 5px;
@@ -36,10 +37,10 @@
             padding: 5px;
 
             &:hover {
-                background-color: rgba(58, 66, 91, 0.8);
+                background-color: rgba(109, 121, 157, 0.8);
             }
             a {
-                color: rgb(163, 169, 174);
+                color: rgb(20, 39, 55);
                 cursor: pointer;
             }
         }
@@ -47,5 +48,6 @@
 
       &:hover > ul{
         display: block;
+        transition: ease-in 0.2s;
       }
 }
