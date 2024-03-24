@@ -1,7 +1,7 @@
 .profile-container {
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: space-around;
   flex-wrap: wrap;
 }
 .profile {
@@ -34,7 +34,7 @@
 .menu-box {
   width: 300px;
 }
-.menu-box .titular {
+.menu-box .titular, .title {
   background: #314689;
   color: aliceblue;
 }
@@ -188,16 +188,20 @@
 .right-container {
 }
 .join-newsletter {
-  padding: 5%;
   text-align: center;
+  p {
+    margin: 10px;
+  }
 }
+
 .social {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
+  padding: 50px 10px;
 }
 .social li {
-  margin-left: 10px;
+  margin-left: 20px;
 }
 .social a {
   line-height: 30px;
@@ -390,9 +394,12 @@
   background-color: #41707a;
   color: #a2c4cb;
   padding: 10px;
-  margin-top: 10px;
+  margin: 20px;
   border-radius: 5px;
   &:hover {
     background-color: #2f575e;
   }
+}
+#nocontacts {
+  padding: 20%;
 }

@@ -1,19 +1,18 @@
 <div class="profile-container">
-  <div class="menu-box block" *ngIf="user.type=='Fournisseur'">
+  <div class="menu-box block" *ngIf="user?.type=='Fournisseur'">
     <!-- MENU BOX (LEFT-CONTAINER) -->
-    <h2 class="titular">Compétances</h2>
+    <h2 class="titular">Compétences</h2>
     <ul class="menu-box-menu">
       <li *ngFor="let s of skills; let i=index;">
         <p class="menu-box-tab"> {{replace(s)}} </p>
-        <a *ngIf="app.user?.id == user.id" (click)="removeSkill(i)"> <i class="fa fa-remove"></i> </a>
+        <a *ngIf="app.user?.id == user?.id" (click)="removeSkill(i)"> <i class="fa fa-remove"></i> </a>
       </li>
-      <li class="newSkill" *ngIf="app.user?.id == user.id">
-        <input type="text" name="skill" placeholder="ajouter compétance" [(ngModel)]="newSkill">
+      <li class="newSkill" *ngIf="app.user?.id == user?.id">
+        <input type="text" name="skill" placeholder="ajouter compétence" [(ngModel)]="newSkill">
         <a (click)="addSkill()"> + </a>
       </li>
     </ul>
   </div>
-
   <div class="profile block">
     <!-- PROFILE (MIDDLE-CONTAINER) -->
     <div class="profile-picture big-profile-picture clear">
@@ -23,13 +22,35 @@
     <div class="profile-description">
       <p class="scnd-font-color">{{ user.description }}</p>
     </div>
-    <ul class="profile-options horizontal-list">
+    <ul class="profile-options horizontal-list" *ngIf="user.type == 'Demandeur'">
       <li class="missions">
-        53<br />
+        {{stats[0]}}<br />
         <img title="projets" src="../../assets/icons/projet.png" width="30px" />
       </li>
       <li class="likes">
-        41<br />
+        --<br />
+        <img
+          title="projets terminés"
+          src="../../assets/icons/satisfaction.png"
+          width="30px"
+        />
+      </li>
+      <li class="dislikes">
+        --<br />
+        <img
+          title="dissatisfactions"
+          src="../../assets/icons/dissatisfaction.png"
+          width="30px"
+        />
+      </li>
+    </ul>
+    <ul class="profile-options horizontal-list" *ngIf="user.type == 'Fournisseur'">
+      <li class="missions">
+        {{stats[0]}}<br />
+        <img title="services proposés" src="../../assets/icons/projet.png" width="30px" />
+      </li>
+      <li class="likes">
+        {{stats[1]}}<br />
         <img
           title="satisfactions"
           src="../../assets/icons/satisfaction.png"
@@ -37,7 +58,7 @@
         />
       </li>
       <li class="dislikes">
-        4<br />
+        {{stats[2]}}<br />
         <img
           title="dissatisfactions"
           src="../../assets/icons/dissatisfaction.png"
@@ -48,10 +69,11 @@
   </div>
 
   <div class="join-newsletter block">
-    <h2 class="titular">Contact</h2>
-    <div *ngIf="!user.contacts">aucun contact ajouté encore</div>
+    <h2 class="title titular">Contacts</h2>
+    <p *ngIf="!user?.contacts && !user?.tel" id="nocontacts">aucun contact ajouté encore</p>
+    <p *ngIf="user?.tel"><strong>Téléphone:</strong> {{user.tel}}</p>
     <ul class="social">
-      <li *ngFor="let c of user.contacts ? user.contacts.split(' ') : []">
+      <li *ngFor="let c of user?.contacts ? user?.contacts?.split(' ') : []">
         <a [href]="'http://' + c">
           <div
             *ngIf="getSocial(c) != 'default'"
@@ -68,6 +90,6 @@
         </a>
       </li>
     </ul>
-    <a *ngIf="app.user?.id == user.id" class="add" routerLink="../paramètres" fragment="ajoutercontact" data-toggle="collapse">ajouter</a>
+    <a *ngIf="app.user?.id == user?.id" class="add" routerLink="../paramètres" fragment="ajoutercontact" data-toggle="collapse">ajouter</a>
   </div>
 </div>

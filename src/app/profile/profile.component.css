@@ -225,12 +225,15 @@ header {
 
 /** CONTAINERS **/
 .container {
-  height: 500px;
+  min-height: 500px;
+  width: 100%;
 }
 .block {
   background: rgba(83, 110, 190, 0.46);
   border-radius: 5px;
   margin: 20px;
+  height: fit-content;
+  box-shadow: 0 0px 10px rgba(7, 43, 77, 0.49);
 }
 
 .navbar-default {
@@ -240,9 +243,9 @@ header {
 
 /*main side bar*/
 .msb {
-  opacity: 0.7;
   z-index: 1;
-  width: 200px;
+  width: 50px;
+  overflow-x: hidden;
   background-color: #f5f7f9;
   position: fixed;
   overflow-y: auto;
@@ -250,6 +253,8 @@ header {
   white-space: nowrap;
   height: 100%;
   border-right: 1px solid #ddd;
+  transition: ease-in 0.2s;
+
   .navbar {
     border: none;
     margin-left: 0;
@@ -266,6 +271,7 @@ header {
       border: 0 none;
       box-shadow: none;
       margin: 0;
+      padding: 0;
       background: transparent;
     }
     li {
@@ -276,7 +282,18 @@ header {
         color: #5f5f5f;
         .glyphicon,
         .fa {
-          margin-right: 8px;
+          font-size: 20px;
+          margin-right: 20px;
+        }
+        &:hover {
+          background-color: #9da5bd;
+        }
+      }
+      li a {
+        font-size: 13px;
+        margin-left: 5px;
+        .fa {
+          font-size: 14px;
         }
       }
     }
@@ -286,6 +303,10 @@ header {
     padding-left: 10px;
     margin-bottom: 30px;
     overflow: hidden;
+  }
+  &:hover {
+    width: 200px;
+    transition: ease-in 0.2s;
   }
 }
 ul.nv,
@@ -332,19 +353,11 @@ ul.ns {
 .mcw {
   position: relative;
   min-height: 100%;
-  padding: 5%;
-
-  /*content view*/
-  .cv {
-  }
+  padding: 1% 1% 5% 10%;
 }
 
 /*globals*/
-a,
-a:focus,
-a:hover {
-  text-decoration: none;
-}
+
 
 .inbox {
   .container-fluid {
@@ -376,14 +389,7 @@ a:hover {
   -webkit-transform-style: preserve-3d;
   transform-style: preserve-3d;
 }
-.mcw {
-  -moz-animation: bodyslidein 300ms forwards;
-  -o-animation: bodyslidein 300ms forwards;
-  -webkit-animation: bodyslidein 300ms forwards;
-  animation: bodyslidein 300ms forwards;
-  -webkit-transform-style: preserve-3d;
-  transform-style: preserve-3d;
-}
+
 body.msb-x {
   .mcw,
   .mnb {
