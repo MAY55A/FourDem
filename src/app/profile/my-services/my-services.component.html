@@ -3,21 +3,23 @@
     <div class="empty" *ngIf="services.length == 0">Aucun service</div>
     <div class="services">
         <div *ngFor="let s of services;let i=index;" class="service">
+            <div class="description">
+                <p *ngIf="s.status == 'accepté'" class="status green">√ accepté</p>
+                <p *ngIf="s.status == 'refusé'" class="status red">✗ refusé</p>
+                <p class="date">proposé {{ s.proposedAt | date: 'à HH:mm, le yyyy/MM/dd' }}</p>
+                <p>{{s.description.substr(0,200)}}...</p>
+                <ul class="skills">
+                    <li *ngFor="let c of s.skills.split(' ')">{{replace(c)}}</li>
+                </ul>
+            </div>
+            <a [routerLink]="['/projets/projet/', s.project!.id]" [fragment]="s.id!.toString()" class="project">{{s.project!.title}} ></a>
             <div  *ngIf="user.id! == app.user?.id!" class="options">
                 <a data-toggle="collapse" [href]="'#options'+i"><span>...</span></a>
                 <ul [id]="'options'+i" class="panel-collapse collapse">
                     <li><button><i class="fa fa-pencil"></i> modifier</button></li>
-                    <li><button (click)="deleteservice(s.id!)"><i class="fa fa-trash"></i> supprimer</button></li>
+                    <li><button (click)="deleteservice(s)"><i class="fa fa-trash"></i> supprimer</button></li>
                 </ul>
             </div>
-            <p class="date">proposé {{ s.proposedAt | date: 'à HH:mm, le yyyy/MM/dd' }}</p>
-            <div class="description">
-                <p>{{s.description.substr(0,100)}}...</p>
-                <ul class="skills">
-                    <li *ngFor="let c of (s.skills ? s.skills.split(' ') : [])">{{c}}</li>
-                </ul>
-            </div>
-            <a [routerLink]="['/projets/projet/', s.project]" class="project">{{s.title}} ></a>
         </div>
     </div>
 </div>

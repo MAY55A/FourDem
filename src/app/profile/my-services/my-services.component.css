@@ -26,16 +26,23 @@ input {
 .skills {
     display: flex;
     flex-wrap: wrap;
-
-    li {
-        border: 2px solid rgb(24, 94, 174);
-        border-radius: 15px;
-        padding: 5px;
-        margin: 5px;
-    }
 }
 .project {
     text-align: end;
+    align-self: self-end;
     width: 100%;
     text-decoration: underline;
+}
+.options {
+    position: relative;
+    top: -10px;
+}
+.status {
+    font-style: italic;
+    &.green {
+        color: rgb(20, 109, 20);
+    }
+    &.red {
+        color: rgb(164, 30, 30);
+    }
 }
