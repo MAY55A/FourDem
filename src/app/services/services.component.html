@@ -3,46 +3,23 @@
     <div class="domaine">
         domaine :&nbsp;&nbsp;
         <select (change)="changeDomain()" [(ngModel)]="domain" name="domaine">
-            <option value="">Tous</option>
-            <option value="it">IT</option>
-            <option value="comptabilité">Comptabilité</option>
-            <option value="influence">Influence</option>
+            <option value="" selected></option>
+            <option value="IT">IT</option>
+            <option value="Comptabilité">Comptabilité</option>
+            <option value="Influence">Influence</option>
         </select>
     </div>
 </form>
-<!--
-<div class="sliderBox categories">
-    <button type="button" class="left fa fa-chevron-left"></button>
-    <div class="sliderWrap">
-      <ul class="sliderContent">
-        <li class="category" routerLinkActive="active"><a routerLink="/services/domaine/categorie"><img src="../../assets/icons/it.png"><h5>categorie</h5></a></li>
-        <li class="category" routerLinkActive="active"><a routerLink="/services/domaine/categorie"><img src="../../assets/icons/it.png"><h5>categorie</h5></a></li>
-        <li class="category" routerLinkActive="active"><a routerLink="/services/domaine/categorie"><img src="../../assets/icons/it.png"><h5>categorie</h5></a></li>
-        <li class="category" routerLinkActive="active"><a routerLink="/services/domaine/categorie"><img src="../../assets/icons/it.png"><h5>categorie</h5></a></li>
-        <li class="category" routerLinkActive="active"><a routerLink="/services/domaine/categorie"><img src="../../assets/icons/it.png"><h5>categorie</h5></a></li>
-        <li class="category" routerLinkActive="active"><a routerLink="/services/domaine/categorie"><img src="../../assets/icons/it.png"><h5>categorie</h5></a></li>
-        <li class="category" routerLinkActive="active"><a routerLink="/services/domaine/categorie"><img src="../../assets/icons/it.png"><h5>categorie</h5></a></li>
-        <li class="category" routerLinkActive="active"><a routerLink="/services/domaine/categorie"><img src="../../assets/icons/it.png"><h5>categorie</h5></a></li>
-        <li class="category" routerLinkActive="active"><a routerLink="/services/domaine/categorie"><img src="../../assets/icons/it.png"><h5>categorie</h5></a></li>
-        <li class="category" routerLinkActive="active"><a routerLink="/services/domaine/categorie"><img src="../../assets/icons/it.png"><h5>categorie</h5></a></li>
-        <li class="category" routerLinkActive="active"><a routerLink="/services/domaine/categorie"><img src="../../assets/icons/it.png"><h5>categorie</h5></a></li>
-        <li class="category" routerLinkActive="active"><a routerLink="/services/domaine/categorie"><img src="../../assets/icons/it.png"><h5>categorie</h5></a></li>
-      </ul>
-    </div>
-    <button type="button" class="right fa fa-chevron-right"></button>
-</div>
--->
 <div class="empty" *ngIf="services.length == 0">Aucun service disponible</div>
 <div class="services">
     <div class="service" *ngFor="let s of services">
-        <a class="info" [routerLink]="['/profile',s.proposerId]">
-            <img [src]="'../../assets/images/users/' + s.proposerId + '.jpg'" onerror="this.src='../../assets/icons/defaultuser.png'">
-            <h5>{{s.proposerName}}</h5>
-            40 <i class="fa fa-thumbs-up"></i>
+        <a class="info" [routerLink]="['/profile',s.proposer.id]">
+            <img [src]="'../../assets/images/users/' + s.proposer.id + '.jpg'" onerror="this.src='../../assets/icons/defaultuser.png'">
+            <h5>{{s.proposer.name}}</h5>
         </a>
         <div style="width:80%">
             <p class="desc">{{s.description}}</p>
-            <h5>compétances</h5>
+            <h5>compétences :</h5>
             <ul class="skills">
                 <li *ngFor="let c of ( s.skills ? s.skills.split(' ') : [])">{{replace(c)}}</li>
             </ul>

@@ -3,125 +3,69 @@
 *:after {
   box-sizing: border-box;
 }
-
+form {
+  display: flex;
+  justify-content: space-between;
+}
+input {
+  border: 3px solid rgba(14, 106, 103, 0.5);
+}
 .domaine {
-  position: absolute;
-  right: 20px;
+
   margin-top: 10px;
   font-size: 17px;
   color: rgba(38, 57, 134, 0.837);
 
   select {
+    border: 3px solid rgba(14, 106, 103, 0.5);
     border-radius: 10px;
     width: 150px;
   }
 }
 
-.sliderBox {
-  max-width: 100%;
-  position: relative;
+.services {
+  margin: 50px;
 
-  .sliderWrap {
-    overflow: hidden;
-    margin: 0 3em;
+  .service {
+    display: flex;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 40px;
+    border: 3px solid rgba(14, 106, 103, 0.5);
+    background: hsla(0, 0%, 100%, 0.692);
+    &:hover {
+      box-shadow: 0 0px 10px rgba(17, 169, 164, 0.3);
+    }
+    .info {
+      text-align: center;
+      padding: 50px 30px;
 
-    .sliderContent {
-      white-space: nowrap;
-      margin: 1em 0;
-      padding: 0;
-      transition: left 1s;
-      position: relative;
-      left: 0;
-      display: inline-block;
+      img {
+        width: 100px;
+        height: 100px;
+        border-radius: 100px;
+        border: 3px solid rgba(14, 106, 103, 0.5);
+        margin-bottom: 10px;
+      }
+    }
+
+    .desc {
+      margin-bottom: 10px;
+      color: rgb(6, 41, 29);
+    }
+
+    .skills {
+      display: flex;
+      flex-wrap: wrap;
 
       li {
-        img {
-            width: 8em;
-            height: 8em;
-            margin: 1em;
-        }
-        display: inline-block;
-        text-align: center;
-        width: 15em;
-        height: 15em;
-        border: 1px dotted #bababa;
-        border-radius: 20px;
-        margin: 10px;
+        box-shadow: 0 0px 10px rgba(71, 71, 71, 0.2);
+        background-color: rgba(26, 148, 144, 0.641);
+        border-radius: 15px;
+        padding: 8px;
+        margin: 5px;
+        color: aliceblue;
       }
     }
   }
-
-  button {
-    border: none;
-    background: none;
-    font-size: 2em;
-    position: absolute;
-    top: 50%;
-    left: 0;
-    transform: translateY(-50%);
-    color: #bababa;
-
-    &:hover {
-      color: #747474;
-    }
-
-    &.right {
-      left: auto;
-      right: 0;
-    }
-  }
 }
-
-.category.active, .category:hover {
-  background:rgba(24, 94, 174,0.3);
-
-  img {
-    filter:invert(100%);
-  }
-
-  h5 {
-    color: white;
-  }
-}
-
-.services {
-    margin: 50px;
-
-    .service {
-        display: flex;
-        padding: 20px;
-        margin-bottom: 20px;
-        border-radius: 30px;
-        background: linear-gradient(to right, rgba(143, 160, 229, 0.837), rgb(234, 234, 234, 0.1));
-
-        .info {
-          text-align: center;
-          padding: 50px 30px;
-
-          img {
-            width: 100px;
-            height: 100px;
-            border-radius: 100px;
-            border: 2px solid rgb(23, 26, 68);
-            margin-bottom: 10px;
-          }
-        }
-
-        .desc {
-            margin-bottom: 10px;
-        }
-
-        .skills {
-            display: flex;
-            flex-wrap: wrap;
-
-            li {
-                border: 2px solid rgb(24, 94, 174);
-                border-radius: 15px;
-                padding: 5px;
-                margin: 5px;
-            }
-        }
-    }
-}
-

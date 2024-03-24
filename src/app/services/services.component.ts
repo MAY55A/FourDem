@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { ServiceService } from '../_services/service.service';
 import { Service } from '../_models/service';
@@ -20,6 +20,8 @@ export class ServicesComponent implements OnInit{
   ngOnInit(): void {
     this.route.paramMap.subscribe(
       (params: ParamMap)=> {
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
         this.domain = params.get('domaine');
         if(!this.domain)
           this.getAllServices();
@@ -49,7 +51,7 @@ export class ServicesComponent implements OnInit{
   }
 
   search() {
-    this.services = this.allServices?.filter(s => s.proposerName.toLowerCase().includes(this.searchValue) || s.description.toLowerCase().includes(this.searchValue) || s.skills.toLowerCase().includes(this.searchValue));
+    this.services = this.allServices?.filter(s => s.proposer.name.toLowerCase().includes(this.searchValue) || s.description.toLowerCase().includes(this.searchValue) || s.skills.toLowerCase().includes(this.searchValue));
   }
   
   replace(s: string): string {
