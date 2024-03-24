@@ -1,0 +1,52 @@
+<div class="filters">
+    <select name="type" [(ngModel)]="status" (ngModelChange)="filterStatus()">
+      <option value="" selected>Tous</option>
+      <option value="publié">Publiés</option>
+      <option value="proposé">Proposés</option>
+      <option value="terminé">Terminés</option>
+      <option value="refusé">Réfusés</option>
+    </select>
+    <div class="input-group custom-search-form">
+      <input type="text" class="form-control" placeholder="Search..." name="search" [(ngModel)]="searchValue"/>
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="button" (click)="search()">
+          <i [class]="icon"></i>
+        </button>
+      </span>
+    </div>
+  </div>
+  <table class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <th>#Id</th>
+        <th>Titre</th>
+        <th>Id Proposeur</th>
+        <th>Nom Proposeur</th>
+        <th>Catégories</th>
+        <th>Status</th>
+        <th>Date de proposition</th>
+        <th>Date de publication</th>
+        <th>Date de terminison</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let p of projects;">
+        <td><a [routerLink]="['/projets/projet/',p.id]">{{p.id}}</a></td>
+        <td>{{p.title}}</td>
+        <td><a [routerLink]="['/profile/',p.proposer.id]">{{p.proposer.id}}</a></td>
+        <td>{{p.proposer.name}}</td>
+        <td>{{getCategories(p.categories)}}</td>
+        <td>{{p.status}}</td>
+        <td>{{p.proposedAt | date: ' HH:mm, yyyy-MM-dd'}}</td>
+        <td>{{p.publishedAt | date: ' HH:mm, yyyy-MM-dd'}}</td>
+        <td>{{p.finishedAt | date: ' HH:mm, yyyy-MM-dd'}}</td>
+        <td class="actions">
+            <button *ngIf="p.status == 'proposé'" class="btn btn-success" (click)="UpdateProjectStatus(p, 'publié')"><i class="fa fa-check"></i> publier</button>
+            <button *ngIf="p.status == 'proposé'" class="btn btn-danger" (click)="UpdateProjectStatus(p, 'refusé')"><i class="fa fa-remove"></i> refuser</button>
+            <button *ngIf="p.status == 'publié' || p.status == 'refusé'" class="btn btn-warning" (click)="UpdateProjectStatus(p, 'proposé')"><i class="fa fa-ban"></i> annuler</button>
+            <button class="remove" (click)="deleteProject(p)"><i class="fa fa-remove"></i></button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
