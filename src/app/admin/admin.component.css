@@ -1,0 +1,43 @@
+.admin {
+    box-shadow: 0 0px 10px rgba(71, 71, 71, 0.4);
+    padding: 10px;
+}
+.container {
+    margin: 20px;
+}
+.actions {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 20px;
+    border: none;
+    button {
+        width: 100px;
+        margin: 5px;
+    }
+}
+.remove {
+    color: red;
+    font-size: 18px;
+}
+.filters {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 50px;
+    select {
+        width: 200px;
+        border-radius: 5px;
+        margin-right: 10px;
+    }
+}
+.input-group {
+    width: 300px;
+    .form-control {
+        z-index: 0;
+    }
+}
+table {
+    background-color: rgba(240, 248, 255, 0.564);
+}
+form button {
+    margin: 10px;
+}

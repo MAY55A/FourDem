@@ -1,0 +1,39 @@
+<div class="msb" id="msb">
+  <nav class="navbar navbar-default" role="navigation">
+    <div class="side-menu-container">
+      <ul class="nav navbar-nav">
+        <li>
+          <a routerLink="accueil" routerLinkActive="active"
+            ><i class="fa fa-home"></i> Admin</a
+          >
+        </li>
+        <li>
+          <a routerLink="comptes" routerLinkActive="active"
+            ><i class="fa fa-group"></i> Utilisateurs</a
+          >
+        </li>
+        <li>
+          <a routerLink="projets" routerLinkActive="active"
+            ><i class="fa fa-folder-open"></i> Projets</a
+          >
+        </li>
+        <li>
+          <a routerLink="services" routerLinkActive="active"
+            ><i class="fa fa-briefcase"></i> Services</a
+          >
+        </li>
+        <li>
+          <a routerLink="categories" routerLinkActive="active"
+            ><i class="fa fa-tags"></i> Catégories</a
+          >
+        </li>
+      </ul>
+    </div>
+  </nav>
+</div>
+<div class="mcw">
+  <div class="admin"><a routerLink=".">Espace Administratif</a> > {{router.url.split("/")[2]}}</div>
+  <div class="container">
+  <router-outlet></router-outlet>
+  </div>
+</div>
