@@ -1,17 +1,28 @@
 <div class="container" id="container">
-    <div class="form-container">
-            <h1>Se connecter</h1>
-            <input type="email" placeholder="Email" [(ngModel)]="email" required/>
-            <input type="password" placeholder="mot de passe" [(ngModel)]="password" required/>
-            <a href="">mot de passe oublié?</a>
-            <button (click)="login()">se connecter</button>
-            <div class="alert alert-danger" role="alert" *ngIf ="alert">
-                <strong>Échec !</strong> {{alert}}
-            </div>
+  <div class="form-container">
+    <h1>Se connecter</h1>
+    <input type="email" placeholder="Email" [(ngModel)]="email" required />
+    <input
+      type="password"
+      placeholder="mot de passe"
+      [(ngModel)]="password"
+      required
+    />
+    <a href="">mot de passe oublié?</a>
+    <button (click)="login()">connecter</button>
+    <div class="alert alert-danger" role="alert" *ngIf="alert">
+      <strong>Échec !</strong> {{ alert }}
     </div>
-    <div class="overlay-container">
-        <h1></h1>
-        <p>Inscrivez-vous dès maintenant pour accéder à notre réseau exclusif de professionnels et de services.</p>
-        <button routerLink="/compte/creation1" class="ghost" id="signUp">s'inscrire</button>
-    </div>
+    <a id="admin" title="admin" routerLink="../connexion-admin"><i class="fa fa-lock"></i></a>
+  </div>
+  <div class="overlay-container">
+    <h1></h1>
+    <p>
+      Inscrivez-vous dès maintenant pour accéder à notre réseau exclusif de
+      professionnels et de services.
+    </p>
+    <button routerLink="/compte/creation1" class="ghost" id="signUp">
+      s'inscrire
+    </button>
+  </div>
 </div>

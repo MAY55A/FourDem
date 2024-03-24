@@ -1,0 +1,18 @@
+<div class="container" id="container">
+    <form class="form-container">
+      <h1>Bienvenue admin !</h1>
+      <p>Pour avoir accés au espace administratif, vous devez entrer votre clé</p>
+      <input
+        id="key"
+        type="password"
+        name="mdp"
+        placeholder="entrer le clé"
+        [(ngModel)]="password"
+        required
+      />
+      <div class="alert alert-danger" role="alert" *ngIf="alert">
+        <strong>Échec !</strong> {{ alert }}
+      </div>
+      <button type="submit" (click)="login()" id="admin">connecter</button>
+    </form>
+  </div>

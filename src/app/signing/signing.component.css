@@ -134,6 +134,7 @@ button.ghost {
 .full-container {
     width: 100%;
     text-align: center;
+    padding-top: 5%;
 }
 
 .choice a {
