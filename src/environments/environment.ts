@@ -1,3 +1,4 @@
 export const environment = {
-    apiUrl: "http://localhost:3000"
+    production: true,
+    apiUrl: "https://fourdem-back-production.up.railway.app/"
 };

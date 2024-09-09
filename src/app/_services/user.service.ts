@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { User } from '../_models/user';
-import { environment } from 'src/environments/environment.development';
+import { environment } from 'src/environments/environment';
 import { AuthService } from './auth.service';
 import { NotificationService } from './notification.service';
 import { mergeMap } from 'rxjs';

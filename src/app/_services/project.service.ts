@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Project } from '../_models/project';
 import { Notification } from '../_models/notification';
-import { environment } from 'src/environments/environment.development';
+import { environment } from 'src/environments/environment';
 import { Observable, forkJoin, mergeMap } from 'rxjs';
 import { NotificationService } from './notification.service';
 import { ServiceService } from './service.service';

@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { environment } from 'src/environments/environment.development';
+import { environment } from 'src/environments/environment';
 import { Category } from '../_models/category';
 import { mergeMap } from 'rxjs';
 import { NotificationService } from './notification.service';

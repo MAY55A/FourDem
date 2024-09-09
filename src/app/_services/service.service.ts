@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Service } from '../_models/service';
 import { Notification } from '../_models/notification';
-import { environment } from 'src/environments/environment.development';
+import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { NotificationService } from './notification.service';
 import { Observable, forkJoin, mergeMap } from 'rxjs';
