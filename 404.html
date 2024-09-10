@@ -7,8 +7,9 @@
     (function() {
       var baseHref = '/FourDem/';
       var path = window.location.pathname;
-      var cleanPath = path.replace(baseHref, '') || '/';
-      window.location.href = baseHref + 'index.html' + cleanPath + window.location.search;
+      var cleanPath = path.replace(baseHref, '');
+      var newUrl = baseHref + 'index.html' + '?/' + cleanPath + '?' + window.location.search;
+      window.location.href = newUrl;
     })();
   </script>
 </head>
