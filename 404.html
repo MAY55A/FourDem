@@ -1,4 +1,18 @@
-<script>
-  window.location.href = '/FourDem/index.html?' + 
-  window.location.pathname + window.location.search;
-</script>
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Page Not Found</title>
+  <script>
+    (function() {
+      var baseHref = '/FourDem/';
+      var path = window.location.pathname;
+      var cleanPath = path.replace(baseHref, '') || '/';
+      window.location.href = baseHref + 'index.html' + cleanPath + window.location.search;
+    })();
+  </script>
+</head>
+<body>
+  <h1>Redirecting...</h1>
+</body>
+</html>
